@@ -1,14 +1,26 @@
 package FTL::Controller::Root;
 use Moose;
 use namespace::autoclean;
+BEGIN { extends "Catalyst::Controller" }
 
-BEGIN { extends 'Catalyst::Controller' }
-
-#
-# Sets the actions in this controller to be registered with no prefix
-# so they function identically to actions created in MyApp.pm
-#
 __PACKAGE__->config(namespace => '');
+
+sub index :Path Args(0) {
+    my ( $self, $c ) = @_;
+    $c->response->body("O HAI, FTL");
+}
+
+sub default :Path {
+    my ( $self, $c ) = @_;
+    $c->response->body( 'Page not found' );
+    $c->response->status(404);
+}
+
+sub end : ActionClass('RenderView') {}
+
+__PACKAGE__->meta->make_immutable;
+
+1;
 
 =head1 NAME
 
@@ -24,35 +36,6 @@ FTL::Controller::Root - Root Controller for FTL
 
 The root page (/)
 
-=cut
-
-sub index :Path :Args(0) {
-    my ( $self, $c ) = @_;
-
-    # Hello World
-    $c->response->body( $c->welcome_message );
-}
-
-=head2 default
-
-Standard 404 error page
-
-=cut
-
-sub default :Path {
-    my ( $self, $c ) = @_;
-    $c->response->body( 'Page not found' );
-    $c->response->status(404);
-}
-
-=head2 end
-
-Attempt to render a view, if needed.
-
-=cut
-
-sub end : ActionClass('RenderView') {}
-
 =head1 AUTHOR
 
 apv
@@ -63,7 +46,3 @@ This library is free software. You can redistribute it and/or modify
 it under the same terms as Perl itself.
 
 =cut
-
-__PACKAGE__->meta->make_immutable;
-
-1;
