@@ -1,0 +1,9 @@
+---
+auto_fieldset:
+  legend: Edit this scritto
+elements:
+  - type: Text
+    name: title
+    label: Title
+    constraints: 
+      - Required
