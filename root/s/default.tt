@@ -1,3 +1,3 @@
 
-There is no page [% c.request.arguments.0 | html %]. Would you like to
-<a href="[% c.uri_for_action("form") %]">create one</a>?
+There is no page [% scritto.title | html %]. Would you like to
+<a href="[% c.uri_for_action("s/edit", [scritto.title]) %]">create one</a>?

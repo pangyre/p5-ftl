@@ -1,3 +1,15 @@
 ---
 name: "FTL"
 default_view: "TT"
+default_model: "DBIC"
+
+# MODELS -------------------------------------------------
+Model::DBIC:
+  connect_info:
+    - dbi:SQLite:__path_to(dummy.sqlt)__
+    - ~
+    - ~
+    - RaiseError: 1
+      AutoCommit: 1
+      ChopBlanks: 1
+      sqlite_unicode: 1
