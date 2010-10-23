@@ -1,1 +1,11 @@
-O HAI, [% c.config.name %].
+<h2>
+ O HAI, [% c.config.name %]!
+</h2>
+
+[% FILTER html_para %]
+Legal page alla http://diveintohtml5.org/legal.html ... should be able
+to discover plugins etc.
+
+Editable style table to go with tags. scritto tag style scritto_tag tag_style style
+[% END %]
+

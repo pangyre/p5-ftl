@@ -33,12 +33,9 @@ header a {
  margin:1ex 10% 0 30px;
  padding:0;
 }
-#content > * {
- margin-left:1em;
-}
 footer {
  text-align:center;
- margin:0 0 25px 50px;
+ margin:2em 0 25px 35px;
  padding:4px 0;
 }
 article, aside, footer, #authentication {
@@ -87,6 +84,9 @@ article h1 {
  font-size:1.5em;
  padding-right:5em;
 }
+#content > * {
+ margin-left:1% ! important;
+}
 
 </style>
 <script type="text/javascript">//<![CDATA[
@@ -103,18 +103,10 @@ jQuery(function($) {
 
  <div id="content">
 
-[% content %]
-
-<h3>To do</h3>
-
-[% FILTER html_para %]
-Legal page alla http://diveintohtml5.org/legal.html ... should be able
-to discover plugins etc.
-
-Editable style table to go with tags. scritto tag style scritto_tag tag_style style
-[% END %]
+[%-content-%]
 
  </div>
+
  <footer>
   <small>
 FTL is free open source software released under
