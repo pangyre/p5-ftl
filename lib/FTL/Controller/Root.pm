@@ -7,7 +7,6 @@ __PACKAGE__->config(namespace => '');
 
 sub index :Path Args(0) {
     my ( $self, $c ) = @_;
-    $c->response->body("O HAI, FTL");
 }
 
 sub default :Path {

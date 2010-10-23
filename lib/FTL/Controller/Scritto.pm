@@ -33,6 +33,8 @@ sub edit :Chained("scritto") Args(0) FormConfig {
 
     my $form = $c->stash->{form};
     $form->constraints_from_dbic($c->model("Scritto"));
+    $form->model->default_values( $scritto );
+
     $form->render;
 
     if ( $form->submitted_and_valid )

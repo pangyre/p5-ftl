@@ -5,6 +5,7 @@ use parent "Catalyst::View::TT";
 
 __PACKAGE__->config(
     TEMPLATE_EXTENSION => '.tt',
+    WRAPPER => "lib/html5.tt",
     render_die => 1,
 );
 

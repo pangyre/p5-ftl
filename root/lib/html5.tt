@@ -1,0 +1,127 @@
+<html lang="en">
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>[% title || c.config.name %]</title>
+  <link rel="stylesheet" type="text/css" href="[% c.uri_for("/css/universal.css") %]" />
+[%-# feed, prev, next, opensearch, etc %]
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <script type="text/javascript"
+        src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+  <script type="text/javascript"
+        src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<style>
+img {
+ border:none;
+}
+body {
+ background-color:#f8faf9;
+ color:#001;
+ font-family:"helvetica neue", helvetica, sans-serif;
+ font-size:.8em; 
+ line-height:1.125em; /* 16 font-size:0.75em; */
+ margin:0 10%;
+}
+header {
+ margin:20px 0 0 0;
+ padding:0;
+ border:0;
+}
+header a {
+ text-decoration:none;
+}
+#content {
+ margin:1ex 10% 0 30px;
+ padding:0;
+}
+#content > * {
+ margin-left:1em;
+}
+footer {
+ text-align:center;
+ margin:0 0 25px 50px;
+ padding:4px 0;
+}
+article, aside, footer, #authentication {
+ border:1px solid #99a;
+ border:1px solid #aab;
+ border-radius:1ex 0;
+ background-color:rgba(253,253,255,0.9);
+ padding: 2px .9ex 3px 1ex;
+ box-shadow:2px 3px 3px rgba(0,0,33,0.53);
+ -webkit-box-shadow:2px 3px 3px rgba(0,0,33,0.53);
+ -moz-box-shadow:2px 3px 3px    rgba(0,0,33,0.53);
+}
+
+fieldset {
+ border:1px solid #aab;
+ border-radius:1ex 0;
+ box-shadow:2px 3px 3px rgba(0,0,33,0.53);
+ -webkit-box-shadow:2px 3px 3px rgba(0,0,33,0.53);
+ -moz-box-shadow:2px 3px 3px    rgba(0,0,33,0.53);
+
+}
+
+article {
+ clear:both;
+ width:100%;
+ margin:1ex auto;
+}
+
+aside {
+ float:right;
+ width:15em;
+ margin:-3ex -7em 3px 1ex;
+ font-size:90%;
+ background-color:rgba(255,255,245,0.88);
+}
+
+h1 {
+ line-height:110%;
+ padding:0;
+ margin: 3px 0;
+ font-weight:normal;
+}
+
+article h1 {
+ font-family:"trebuchet ms";
+ font-size:1.5em;
+ padding-right:5em;
+}
+
+</style>
+<script type="text/javascript">//<![CDATA[
+jQuery(function($) {
+});
+//]]> </script>
+</head>
+<body>
+
+ <header>
+  <a href="[% c.uri_for("/") %]">[% c.config.name %]</a>
+  <h1>[% title || "Untitled page: " _ c.config.name %]</h1>
+ </header>
+
+ <div id="content">
+
+[% content %]
+
+<h3>To do</h3>
+
+[% FILTER html_para %]
+Legal page alla http://diveintohtml5.org/legal.html ... should be able
+to discover plugins etc.
+
+Editable style table to go with tags. scritto tag style scritto_tag tag_style style
+[% END %]
+
+ </div>
+ <footer>
+  <small>
+FTL is free open source software released under
+the <a itemprop="license"
+       href="http://www.perlfoundation.org/artistic_license_2_0">Artistic
+    License 2.0</a> &middot; <a href="http://github.com/pangyre/p5-ftl">FTL on Github</a>
+  </small>
+ </footer>
+ </body>
+</html>
