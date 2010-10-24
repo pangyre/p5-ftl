@@ -5,5 +5,11 @@ elements:
   - type: Text
     name: title
     label: Title
-    constraints: 
+  - type: Textarea
+    name: body
+    label: Content
+    constraints:
       - Required
+  - type: Text
+    name: parent
+    label: Parent
