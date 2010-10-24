@@ -1,3 +1,4 @@
 
-There is no page [% scritto.title | html %]. Would you like to
-<a href="[% c.uri_for_action("s/edit", [scritto.title]) %]">create one</a>?
+<p>
+There is no page [% scritto.title | html %]. Would you like to <a href="[% c.uri_for_action("s/edit", [scritto.title]) %]">create one</a>?
+</p>

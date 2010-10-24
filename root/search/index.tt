@@ -1,0 +1,10 @@
+[% c.request.param("q") | html %]
+
+[% FOR scritto IN primary.all %]
+  <p>[% scritto.title | html %]</p>
+[% END %]
+
+
+[% FOR scritto IN secondary.all %]
+  <p>[% scritto.title | html %]</p>
+[% END %]

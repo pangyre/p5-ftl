@@ -2,7 +2,11 @@
  O HAI, [% c.config.name %]!
 </h2>
 
+
 [% FILTER html_para %]
+<a href="/meta/db">meta/db</a>
+
+
 Legal page alla http://diveintohtml5.org/legal.html ... should be able
 to discover plugins etc.
 

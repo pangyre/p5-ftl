@@ -18,7 +18,10 @@ sub scritto :Chained("/") PathPart("s") CaptureArgs(1) {
 }
 
 sub default :Path {
-
+    my ( $self, $c ) = @_;
+    my $title ||= $c->request->arguments->[0];
+    $c->stash->{scritto} ||=
+        $c->model("Scritto")->new({ title => $title });
 }
 
 sub view :PathPart("") Chained("scritto") Args(0) {
