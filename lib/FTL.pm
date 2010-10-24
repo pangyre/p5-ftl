@@ -17,7 +17,13 @@ $VERSION = eval $VERSION;
 __PACKAGE__->config(
     "Plugin::ConfigLoader" => {
         file => "ftl.yml", #__PACKAGE__->path_to("conf"),
-        substitutions => {}
+        substitutions => {},
+    },
+    static => {
+        debug => 1,
+#        dirs => [ "static", "../3rd" ],
+        include_path => [ __PACKAGE__->path_to('root/static'), ],
+        ignore_extensions => [],
     },
 );
 
