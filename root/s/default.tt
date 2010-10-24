@@ -1,4 +1,7 @@
+<p>
+There is no resource titled <b>[% scritto.title | html %]</b>. Would you like to <a href="[% c.uri_for_action("s/edit", [scritto.title]) %]">create one</a>?
+</p>
 
 <p>
-There is no page <b>[% scritto.title | html %]</b>. Would you like to <a href="[% c.uri_for_action("s/edit", [scritto.title]) %]">create one</a>?
+Alternatively, <a href="">create an untitled resource</a>.
 </p>

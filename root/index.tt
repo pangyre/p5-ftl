@@ -1,4 +1,3 @@
-[% PROCESS search/basic_form.tt %]
 <h2>
  O HAI, [% c.config.name %]!
 </h2>
@@ -7,9 +6,12 @@
 [% FILTER html_para %]
 <a href="/meta/db">meta/db</a>
 
-
 Legal page alla http://diveintohtml5.org/legal.html ... should be able
 to discover plugins etc.
+
+UC/lc/Title-Case JS on any title-ish fields.
+
+Better name: "Working Title," "Untitled?"
 
 Editable style table to go with tags. scritto tag style scritto_tag
 tag_style style. Chronology points can be tied so that timelines maybe

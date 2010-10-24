@@ -8,20 +8,23 @@ __PACKAGE__->config(namespace => "s");
 
 sub index :Path Args(0) {
     my ( $self, $c ) = @_;
+    $c->stash(
+        scritti => $c->model("DBIC::Scritto")->search_rs(undef,{page=>1})
+               );
 }
 
 sub scritto :Chained("/") PathPart("s") CaptureArgs(1) {
     my ( $self, $c, $title ) = @_;
     $title ||= $c->request->arguments->[0]; # for forwards
-    $c->stash->{scritto} = $c->model("Scritto")->find($title)
-        || $c->model("Scritto")->new({ title => $title });
+    $c->stash->{scritto} = $c->model("DBIC::Scritto")->find($title)
+        || $c->model("DBIC::Scritto")->new({ title => $title });
 }
 
 sub default :Path {
     my ( $self, $c ) = @_;
     my $title ||= $c->request->arguments->[0];
     $c->stash->{scritto} ||=
-        $c->model("Scritto")->new({ title => $title });
+        $c->model("DBIC::Scritto")->new({ title => $title });
 }
 
 sub view :PathPart("") Chained("scritto") Args(0) {
@@ -30,12 +33,22 @@ sub view :PathPart("") Chained("scritto") Args(0) {
     $c->go("default") unless $scritto->in_storage;
 }
 
+sub create :Local { # PUT
+    my ( $self, $c ) = @_;
+    my $scritto = $c->model("DBIC::Scritto")->new($c->req->body_params);
+    $scritto->uuid(rand(1000000));
+    $scritto->user(1);
+    $scritto->created("now");
+    $scritto->insert_or_update;
+    $c->go("/index");
+}
+
 sub edit :Chained("scritto") Args(0) FormConfig {
     my ( $self, $c ) = @_;
     my $scritto = $c->stash->{scritto};
 
     my $form = $c->stash->{form};
-    $form->constraints_from_dbic($c->model("Scritto"));
+    $form->constraints_from_dbic($c->model("DBIC::Scritto"));
     $form->model->default_values( $scritto );
 
     $form->render;
