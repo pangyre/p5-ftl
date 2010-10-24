@@ -87,7 +87,12 @@ article h1 {
 #content > * {
  margin-left:1% ! important;
 }
-
+#basic_search {
+ position:absolute;
+ top:1ex;
+ right:1ex;
+ width:25em;
+}
 </style>
 <script type="text/javascript">//<![CDATA[
 jQuery(function($) {
@@ -100,6 +105,8 @@ jQuery(function($) {
   <a href="[% c.uri_for("/") %]">[% c.config.name %]</a>
   <h1>[% title || "Untitled page: " _ c.config.name %]</h1>
  </header>
+
+[% PROCESS search/basic_form.tt %]
 
  <div id="content">
 

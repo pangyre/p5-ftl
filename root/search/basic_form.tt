@@ -1,9 +1,9 @@
-<form action="[% c.uri_for_action("/search/index") %]" method="get">
-  <fieldset> 
-    <legend>Basic search</legend> 
+<form id="basic_search" action="[% c.uri_for_action("/search/index") %]" method="get">
+  <fieldset>
+    <legend>Basic search</legend>
     <div>
       <input name="q" type="text" value="" />
       <input name="go" type="submit" value="Go" />
     </div>
-  </fieldset> 
-</form> 
+  </fieldset>
+</form>
