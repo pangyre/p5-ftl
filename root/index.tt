@@ -1,3 +1,4 @@
+[% PROCESS search/basic_form.tt %]
 <h2>
  O HAI, [% c.config.name %]!
 </h2>
