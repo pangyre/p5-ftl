@@ -36,7 +36,7 @@ sub view :PathPart("") Chained("scritto") Args(0) {
 sub create :Local { # PUT
     my ( $self, $c ) = @_;
     my $scritto = $c->model("DBIC::Scritto")->new($c->req->body_params);
-    $scritto->uuid(rand(1000000));
+    #$scritto->uuid(rand(1000000));
     $scritto->user(1);
     $scritto->created("now");
     $scritto->insert_or_update;

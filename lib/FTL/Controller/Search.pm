@@ -8,19 +8,24 @@ sub index :Path Args(0) {
     my $q = $c->req->param("q") || $c->detach;
 
     my $rs = $c->model("DBIC::Scritto")->search(undef,
-                                                { prefetch => [qw/ user /], });
-    my $primary = $rs->search({ title => $q });
-    my $secondary => $rs->search({ -or => [
-                                        title => { LIKE => '%'.$q.'%' },
-                                        body => { LIKE => '%'.$q.'%' },
-                                       ]
-                                 },
-                                 { page => 1,
-                                   rows => 50 },
+                                                # { prefetch => [qw/ user /], }
         );
 
-#    unless ( $primary->count || $secondary->count )
-    unless ( $primary->count )
+    my $primary = $rs->search({ title => $q });
+    my $secondary = $rs->search({
+        -or => [
+             title => { LIKE => '%'.$q.'%' },
+             body => { LIKE => '%'.$q.'%' },
+            ],
+                                },
+#                                 {
+#                                     page => 1,
+#                                     rows => 50
+#                                 },
+        );
+
+
+    unless ( $primary->count || $secondary->count )
     {
         $c->go("/s/default", [$q]);
     }
@@ -44,3 +49,4 @@ FTL::Controller::Search - Search Controller for FTL
 [enter your description here]
 
 =cut
+

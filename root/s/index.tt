@@ -1,0 +1,6 @@
+[% FOR scrit IN scritti.all %]
+  <li>
+  [% scrit.title %]
+  [% scrit.body %]
+  </li>
+[% END %]

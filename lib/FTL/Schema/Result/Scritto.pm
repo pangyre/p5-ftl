@@ -17,8 +17,8 @@ __PACKAGE__->add_columns(
     is_nullable => 0,
     size => 10,
   },
-  "uuid",
-  { data_type => "CHAR", default_value => undef, is_nullable => 0, size => 36 },
+#  "uuid",
+#  { data_type => "CHAR", default_value => undef, is_nullable => 0, size => 36 },
   "user",
   {
     data_type => "INT",
