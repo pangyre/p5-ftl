@@ -3,5 +3,5 @@ There is no resource titled <b>[% scritto.title | html %]</b>. Would you like to
 </p>
 
 <p>
-Alternatively, <a href="">create an untitled resource</a>.
+Alternatively, <a href="[% c.uri_for_action("s/create") | html %]">create an untitled resource</a>.
 </p>

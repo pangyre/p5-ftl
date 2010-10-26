@@ -17,7 +17,7 @@ sub scritto :Chained("/") PathPart("s") CaptureArgs(1) {
     my ( $self, $c, $title ) = @_;
     $title ||= $c->request->arguments->[0]; # for forwards
     $c->stash->{scritto} = $c->model("DBIC::Scritto")->find($title)
-        || $c->model("DBIC::Scritto")->new({ title => $title });
+        || $c->model("DBIC::Scritto")->new({title => $title});
 }
 
 sub default :Path {
@@ -34,19 +34,28 @@ sub view :PathPart("") Chained("scritto") Args(0) {
 }
 
 sub create :Local { # PUT
-    my ( $self, $c ) = @_;
-    my $scritto = $c->model("DBIC::Scritto")->new($c->req->body_params);
-    #$scritto->uuid(rand(1000000));
-    $scritto->user(1);
-    $scritto->created("now");
-    $scritto->insert_or_update;
-    $c->go("/index");
+    my ( $self, $c, $title, $more ) = @_;
+
+    if (  $c->request->method =~ /\A(POST|PUT)\z/ )
+    {
+        my $params = $c->req->body_params;
+        $params->{title} //= $title;
+        my $scritto = $c->model("DBIC::Scritto")->new($params);
+        #$scritto->uuid(rand(1000000));
+        $scritto->user(1);
+        $scritto->created("now");
+        $scritto->insert_or_update;
+        $c->go("index"); # 321 redirect I think.
+    }
+    else
+    {
+        $c->visit("edit");
+    }
 }
 
 sub edit :Chained("scritto") Args(0) FormConfig {
     my ( $self, $c ) = @_;
-    my $scritto = $c->stash->{scritto};
-
+    my $scritto = $c->stash->{scritto} ||= $c->model("DBIC::Scritto")->new({});
     my $form = $c->stash->{form};
     $form->constraints_from_dbic($c->model("DBIC::Scritto"));
     $form->model->default_values( $scritto );

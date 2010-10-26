@@ -23,13 +23,14 @@ html,body {
  font-size:.8em;
  line-height:1.125em; /* 16 font-size:0.75em; */
 }
+table * {
+ font-size:10px;
+}
 
 header {
  background: #ccc;
  padding: 1ex;
 }
-
-header h1 { margin: 0; }
 
 nav
 {
