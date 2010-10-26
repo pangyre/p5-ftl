@@ -1,11 +1,17 @@
 [% c.request.param("q") | html %]
 
-<h3>primary</h3>
+<h1>Search results</h1>
+
+[% IF primary.count AND secondary.count %]
+<h3>Best matches</h3>
+[% END %]
 [% FOR scritto IN primary.all %]
   [% PROCESS lib/scritto_abbr.tt %]
 [% END %]
 
-<h3>secondary</h3>
+[% IF ( primary.count AND secondary.count ) %]
+<h3>More matches</h3>
+[% END %]
 [% FOR scritto IN secondary.all %]
   [% PROCESS lib/scritto_abbr.tt %]
 [% END %]

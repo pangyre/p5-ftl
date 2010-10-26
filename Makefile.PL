@@ -2,23 +2,213 @@
 # IMPORTANT: if you delete this file your app will not work as
 # expected.  You have been warned.
 use inc::Module::Install;
-use Module::Install::Catalyst; # Complain loudly if you don't have
-                               # Catalyst::Devel installed or haven't said
-                               # 'make dist' to create a standalone tarball.
+use Module::Install::Catalyst; # Complain loudly if you don"t have
+                               # Catalyst::Devel installed or haven"t said
+                               # "make dist" to create a standalone tarball.
 
-name 'FTL';
-all_from 'lib/FTL.pm';
+name "FTL";
+all_from "lib/FTL.pm";
 
-requires 'Catalyst::Runtime' => '5.80029';
-requires 'Catalyst::Plugin::ConfigLoader';
-requires 'Catalyst::Plugin::Static::Simple';
-requires 'Catalyst::Action::RenderView';
-requires 'Moose';
-requires 'namespace::autoclean';
-requires 'YAML';
-test_requires 'Test::More' => '0.88';
+requires "Catalyst::Runtime" => "5.80029";
+requires "Catalyst::Plugin::ConfigLoader";
+requires "Catalyst::Plugin::Static::Simple";
+requires "Catalyst::Plugin::Unicode::Encoding";
+requires "Catalyst::Action::RenderView";
+requires "Moose";
+requires "namespace::autoclean";
+requires "YAML";
+requires "JSON::XS";
+
+test_requires "Test::More" => "0.88";
+
 catalyst;
 
-install_script glob('script/*.pl');
+install_script glob("script/*.pl");
 auto_install;
 WriteAll;
+
+
+__END__
+'Variable::Magic'                                    => '0.43',
+'Sub::Exporter'                                      => '0.982',
+'threads'                                            => '1.77',
+'Catalyst::Controller'                               => 'undef',
+'Catalyst::Devel'                                    => '1.28',
+'Catalyst::Log'                                      => 'undef',
+'Catalyst::Request'                                  => 'undef',
+'Catalyst::Request::Upload'                          => 'undef',
+'Catalyst::Response'                                 => 'undef',
+'Class::C3::Adopt::NEXT'                             => '0.13',
+'Tree::Simple::Visitor::FindByUID'                   => '0.02',
+'URI::http'                                          => 'undef',
+'URI::mailto'                                        => 'undef',
+'URI::ldap'                                          => '1.11',
+'URI::https'                                         => 'undef',
+'URI::ftp'                                           => 'undef',
+'URI::gopher'                                        => 'undef',
+'URI::ldapi'                                         => 'undef',
+'URI::ldaps'                                         => 'undef',
+'URI::mms'                                           => 'undef',
+'URI::nntp'                                          => 'undef',
+'URI::pop'                                           => 'undef',
+'URI::rlogin'                                        => 'undef',
+'URI::rsync'                                         => 'undef',
+'URI::rtspu'                                         => 'undef',
+'URI::sips'                                          => 'undef',
+'URI::snews'                                         => 'undef',
+'URI::ssh'                                           => 'undef',
+'URI::telnet'                                        => 'undef',
+'URI::tn3270'                                        => 'undef',
+'URI::urn::isbn'                                     => 'undef',
+'URI::urn::oid'                                      => 'undef',
+'URI::file'                                          => '4.20',
+'URI::news'                                          => 'undef',
+'URI::rtsp'                                          => 'undef',
+'URI::sip'                                           => '0.10',
+'URI::urn'                                           => 'undef',
+'URI::data'                                          => 'undef',
+'URI'                                                => '1.55',
+'Catalyst::Exception::Detach'                        => 'undef',
+'Catalyst::Exception::Go'                            => 'undef',
+'Tree::Simple'                                       => '1.18',
+'Catalyst::Exception'                                => 'undef',
+'Data::OptList'                                      => '0.106',
+'List::MoreUtils'                                    => '0.22',
+'Moose::Util'                                        => '1.16',
+'Moose::Meta::Class'                                 => '1.16',
+'Path::Class::File'                                  => '0.21',
+'Path::Class::Dir'                                   => '0.21',
+'MooseX::MethodAttributes'                           => '0.24',
+'Catalyst::ActionChain'                              => 'undef',
+'Text::SimpleTable'                                  => '2.03',
+'Catalyst::Utils'                                    => 'undef',
+'Catalyst::Action'                                   => 'undef',
+'Catalyst::ActionContainer'                          => 'undef',
+'Tree::Simple::Visitor::FindByPath'                  => '0.03',
+'Data::Dump'                                         => '1.17',
+'URI::QueryParam'                                    => 'undef',
+'uri'                                                => '1.55',
+'HTTP::Headers'                                      => '5.835',
+'Path::Class'                                        => '0.21',
+'String::RewritePrefix'                              => '0.005',
+'HTTP::Request'                                      => '5.827',
+'Algorithm::C3'                                      => '0.08',
+'Class::C3::next'                                    => '0.23',
+'Class::C3'                                          => '0.23',
+'Class::MOP::Deprecated'                             => '1.10',
+'Class::MOP::Mixin::HasAttributes'                   => '1.10',
+'Class::MOP::Mixin::HasMethods'                      => '1.10',
+'MRO::Compat'                                        => '0.11',
+'Class::MOP::Mixin::AttributeCore'                   => '1.10',
+'Class::MOP::Method'                                 => '1.10',
+'Class::MOP::Attribute'                              => '1.10',
+'Class::MOP::Method::Constructor'                    => '1.10',
+'Class::MOP::Method::Wrapped'                        => '1.10',
+'Class::MOP::Instance'                               => '1.10',
+'Try::Tiny'                                          => '0.06',
+'Class::MOP::Method::Accessor'                       => '1.10',
+'Class::MOP::Module'                                 => '1.10',
+'Class::MOP::MiniTrait'                              => '1.10',
+'Devel::GlobalDestruction'                           => '0.02',
+'Sub::Name'                                          => '0.05',
+'Class::MOP::Method::Generated'                      => '1.10',
+'Class::MOP::Method::Inlined'                        => '1.10',
+'Perl::Tidy'                                         => '20090616',
+'Class::MOP::Mixin'                                  => '1.10',
+'Class::MOP::Method::Meta'                           => '1.10',
+'Data::Dump::FilterContext'                          => 'undef',
+'Data::Dump::Filtered'                               => 'undef',
+'Params::Util'                                       => '1.01',
+'Sub::Install'                                       => '0.925',
+'Catalyst'                                           => '5.80029',
+'Catalyst::DispatchType::Chained'                    => 'undef',
+'Catalyst::DispatchType::Path'                       => 'undef',
+'Catalyst::DispatchType::Regex'                      => 'undef',
+'Catalyst::Dispatcher'                               => 'undef',
+'Catalyst::Runtime'                                  => '5.80029',
+'namespace::autoclean'                               => '0.11',
+'Moose'                                              => '1.16',
+'Catalyst::DispatchType::Default'                    => 'undef',
+'Catalyst::DispatchType::Index'                      => 'undef',
+'Mac::MoreFiles'                                     => '1.04',
+'Time::Zone'                                         => '2.24',
+'HTTP::Date'                                         => '5.831',
+'HTTP::Headers::Util'                                => '5.817',
+'HTTP::Response'                                     => '5.836',
+'HTML::Parser'                                       => '3.68',
+'URI::URL'                                           => '5.03',
+'HTTP::Message'                                      => '5.835',
+'HTTP::Status'                                       => '5.817',
+'HTML::Entities'                                     => '3.68',
+'Mac::Processes'                                     => '1.06',
+'MacPerl'                                            => '1.06',
+'Moose::Meta::Attribute::Native'                     => '1.16',
+'Moose::Meta::Instance'                              => '1.16',
+'Moose::Meta::Role::Application::RoleSummation'      => '1.16',
+'Moose::Meta::Role::Application::ToClass'            => '1.16',
+'Moose::Meta::Role::Application::ToInstance'         => '1.16',
+'Moose::Meta::Role::Application::ToRole'             => '1.16',
+'Moose::Object'                                      => '1.16',
+'Moose::Util::TypeConstraints'                       => '1.16',
+'Moose::Meta::Attribute'                             => '1.16',
+'Moose::Meta::Role::Composite'                       => '1.16',
+'Moose::Deprecated'                                  => '1.16',
+'Moose::Meta::Role::Application'                     => '1.16',
+'Moose::Meta::Role'                                  => '1.16',
+'Moose::Meta::TypeCoercion'                          => '1.16',
+'Moose::Meta::TypeConstraint'                        => '1.16',
+'Moose::Exporter'                                    => '1.16',
+'Package::DeprecationManager'                        => '0.09',
+'Class::MOP::Package'                                => '1.10',
+'Moose::Util::MetaRole'                              => '1.16',
+'Moose::Meta::Method::Accessor'                      => '1.16',
+'Moose::Meta::Method::Delegation'                    => '1.16',
+'Moose::Meta::Mixin::AttributeCore'                  => '1.16',
+'Moose::Error::Default'                              => '1.16',
+'Moose::Meta::Class::Immutable::Trait'               => '1.16',
+'Moose::Meta::Method::Augmented'                     => '1.16',
+'Moose::Meta::Method::Constructor'                   => '1.16',
+'Moose::Meta::Method::Destructor'                    => '1.16',
+'Moose::Meta::Method::Overridden'                    => '1.16',
+'Class::MOP::Class::Immutable::Trait'                => '1.10',
+'Moose::Meta::Role::Attribute'                       => '1.16',
+'Moose::Meta::Role::Method'                          => '1.16',
+'Moose::Meta::Role::Method::Conflicting'             => '1.16',
+'Moose::Meta::Method::Meta'                          => '1.16',
+'Moose::Meta::Role::Method::Required'                => '1.16',
+'metaclass'                                          => '1.10',
+'Moose::Meta::Method'                                => '1.16',
+'Class::MOP::Object'                                 => '1.10',
+'Moose::Meta::TypeConstraint::Class'                 => '1.16',
+'Moose::Meta::TypeConstraint::DuckType'              => '1.16',
+'Moose::Meta::TypeConstraint::Enum'                  => '1.16',
+'Moose::Meta::TypeConstraint::Registry'              => '1.16',
+'Moose::Meta::TypeConstraint::Role'                  => '1.16',
+'Moose::Meta::TypeConstraint::Union'                 => '1.16',
+'Moose::Util::TypeConstraints::OptimizedConstraints' => '1.16',
+'Moose::Meta::TypeConstraint::Parameterized'         => '1.16',
+'Moose::Meta::TypeConstraint::Parameterizable'       => '1.16',
+'Moose::Meta::TypeCoercion::Union'                   => '1.16',
+'MooseX::MethodAttributes::Role::Meta::Role'         => '0.24',
+'Moose::Role'                                        => '1.16',
+'MooseX::MethodAttributes::Role'                     => '0.24',
+'Path::Class::Entity'                                => '0.21',
+'Tree::Simple::Visitor'                              => '1.11',
+'URI::_foreign'                                      => 'undef',
+'URI::_generic'                                      => 'undef',
+'URI::WithBase'                                      => '2.19',
+'URI::_segment'                                      => 'undef',
+'URI::_punycode'                                     => '0.03',
+'URI::_idna'                                         => 'undef',
+'URI::_ldap'                                         => '1.11',
+'URI::_query'                                        => 'undef',
+'URI::Escape'                                        => '3.30',
+'URI::_server'                                       => 'undef',
+'URI::_login'                                        => 'undef',
+'URI::_userpass'                                     => 'undef',
+'Class::MOP'                                         => '1.10',
+'B::Hooks::EndOfScope'                               => '0.09',
+'namespace::clean'                                   => '0.18',
+'Class::MOP::Class'                                  => '1.10',
+'Sub::Identify'                                      => '0.04',
+'Package::Stash'                                     => '0.08',

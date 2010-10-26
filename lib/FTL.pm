@@ -4,9 +4,10 @@ use namespace::autoclean;
 use Catalyst::Runtime 5.80;
 
 use Catalyst qw/
-    ConfigLoader
-    Static::Simple
-/;
+                Unicode::Encoding
+                ConfigLoader
+                Static::Simple
+               /;
 
 extends 'Catalyst';
 

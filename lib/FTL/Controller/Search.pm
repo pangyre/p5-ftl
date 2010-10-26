@@ -13,6 +13,7 @@ sub index :Path Args(0) {
 
     my $primary = $rs->search({ title => $q });
     my $secondary = $rs->search({
+        id => { "NOT IN" => [ map { $_->id } $primary->all ] },
         -or => [
              title => { LIKE => '%'.$q.'%' },
              body => { LIKE => '%'.$q.'%' },
