@@ -55,6 +55,9 @@ sub edit :Chained("scritto") Args(0) FormConfig {
 
     if ( $form->submitted_and_valid )
     {
+        $scritto->user(1);
+        $scritto->created(\q{datetime('now')});
+        $form->model->update($scritto);
     }
 
 }

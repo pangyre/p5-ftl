@@ -1,0 +1,8 @@
+<article>
+<h1>
+  [% scritto.title | html %]
+</h1>
+<div>
+  [% scritto.body | html %]
+</div>
+</article>

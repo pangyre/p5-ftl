@@ -1,15 +1,21 @@
 ---
 auto_fieldset:
-  legend: Edit this scritto
+  legend: Scritto
+
 elements:
   - type: Text
     name: title
     label: Title
+
   - type: Textarea
     name: body
     label: Content
-    constraints:
-      - Required
+#    constraints:
+
   - type: Text
     name: parent
     label: Parent
+  - type: Submit
+    name: x
+    value: Go
+
