@@ -123,10 +123,15 @@ aside
  overflow:hidden;
 }
 footer {
+ border-top:1px solid #445;
  clear:both;
  text-align:center;
- margin:2em 5%;
+ margin:2em 0;
  padding:.5em 0;
+ background:#eef url([% c.uri_for("/img/layout/ftl-footer-fade.png")
+%]) repeat-x scroll left top;
+ min-height:150px;
+ 
 }
 .border {
  border:1px solid #99a;
