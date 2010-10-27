@@ -3,14 +3,10 @@ auto_fieldset:
   legend: Scritto
 
 elements:
-  - type: Text
-    name: title
-    label: Title
-
   - type: Textarea
-    name: body
-    label: Content
-#    constraints:
+    name: scrit
+    constraints:
+      - Required
 
   - type: Text
     name: parent

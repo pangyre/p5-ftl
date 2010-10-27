@@ -1,6 +1,5 @@
 [% FOR scrit IN scritti.all %]
   <li>
-  [% scrit.title %]
-  [% scrit.body %]
+  <a href="[% c.uri_for_action("s/edit", [scrit.id])  %]">[% scrit.scrit | truncate(50,"…") | html %]</a>
   </li>
 [% END %]

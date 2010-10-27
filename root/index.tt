@@ -3,9 +3,8 @@
 </h2>
 
 [% FILTER html_para %]
-<a href="/s">s</a>
-
-<a href="/meta/db">meta/db</a>
+EVERYTHING is discreet writing. Even a title is just a scrit that
+owns things...?
 
 Legal page alla http://diveintohtml5.org/legal.html ... should be able
 to discover plugins etc.

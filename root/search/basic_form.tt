@@ -3,7 +3,7 @@
     <legend>Basic search</legend>
     <div>
       <input name="q" type="text" value="" />
-      <input name="go" type="submit" value="Go" />
+      <input name="go" type="submit" value="go" />
     </div>
   </fieldset>
 </form>

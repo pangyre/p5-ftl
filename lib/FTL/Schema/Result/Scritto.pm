@@ -2,6 +2,7 @@ package FTL::Schema::Result::Scritto;
 use strict;
 use warnings;
 use parent 'DBIx::Class::Core';
+use overload '""' => sub { shift->scrit }, fallback => 1;
 
 __PACKAGE__->load_components("InflateColumn::DateTime");
 
@@ -37,28 +38,19 @@ __PACKAGE__->add_columns(
     is_nullable => 1,
     size => 10,
   },
-  "template",
-  {
-    data_type => "INT",
-    default_value => undef,
-    extra => { unsigned => 1 },
-    is_foreign_key => 1,
-    is_nullable => 1,
-    size => 10,
-  },
-  "title",
-  {
-    data_type => "TEXT",
-    default_value => undef,
-    is_nullable => 1,
-    size => 65535,
-  },
-  "body",
+  "scrit",
   {
     data_type => "MEDIUMTEXT",
     default_value => undef,
-    is_nullable => 1,
+    is_nullable => 0,
     size => 16777215,
+  },
+  "content_type",
+  {
+    data_type => "TEXT",
+    default_value => "text/plain",
+    is_nullable => 0,
+    size => 40,
   },
   "status",
   {

@@ -6,18 +6,23 @@ BEGIN { extends "Catalyst::Controller::HTML::FormFu" }
 
 __PACKAGE__->config(namespace => "s");
 
+has "rows" =>
+    is => "ro",
+    default => 50,
+    ;
+
 sub index :Path Args(0) {
     my ( $self, $c ) = @_;
     $c->stash(
-        scritti => $c->model("DBIC::Scritto")->search_rs(undef,{page=>1})
+        scritti => $c->model("DBIC::Scritto")->search_rs(undef,{page=>1,rows=>$self->rows})
                );
 }
 
 sub scritto :Chained("/") PathPart("s") CaptureArgs(1) {
-    my ( $self, $c, $title ) = @_;
-    $title ||= $c->request->arguments->[0]; # for forwards
-    $c->stash->{scritto} = $c->model("DBIC::Scritto")->find($title)
-        || $c->model("DBIC::Scritto")->new({title => $title});
+    my ( $self, $c, $id ) = @_;
+    $id ||= $c->request->arguments->[0]; # for forwards
+    $c->stash->{scritto} = $c->model("DBIC::Scritto")->find($id);
+#        || $c->model("DBIC::Scritto")->new();
 }
 
 sub default :Path {
