@@ -18,7 +18,7 @@ html,body {
  margin: 0 auto;
  width: 100%;
  background-color:white;
- background-color:#f8faf9;
+ background-color:#fff;
  color:#001;
  font-family:"helvetica neue", helvetica, sans-serif;
  font-size:.8em;
@@ -102,6 +102,7 @@ nav #basic_search input[type="text"] {
 #content{
 float: left;
 width: 100%;
+ background-color:#f8faf9;
 }
 
 #content .body {
@@ -128,9 +129,9 @@ footer {
  text-align:center;
  margin:2em 0;
  padding:.5em 0;
- background:#eef url([% c.uri_for("/img/layout/ftl-footer-fade.png")
+ background:#fff url([% c.uri_for("/img/layout/ftl-footer-fade.jpg")
 %]) repeat-x scroll left top;
- min-height:150px;
+ min-height:151px;
  
 }
 .border {
