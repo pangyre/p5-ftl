@@ -25,26 +25,19 @@ sub scritto :Chained("/") PathPart("s") CaptureArgs(1) {
 #        || $c->model("DBIC::Scritto")->new();
 }
 
-sub default :Path {
-    my ( $self, $c ) = @_;
-    my $title ||= $c->request->arguments->[0];
-    $c->stash->{scritto} ||=
-        $c->model("DBIC::Scritto")->new({ title => $title });
-}
-
 sub view :PathPart("") Chained("scritto") Args(0) {
     my ( $self, $c ) = @_;
     my $scritto = $c->stash->{scritto};
     $c->go("default") unless $scritto->in_storage;
 }
 
-sub create :Local { # PUT
-    my ( $self, $c, $title, $more ) = @_;
+sub create :Local Args(0) { # PUT
+    my ( $self, $c ) = @_; # No id...?
 
     if (  $c->request->method =~ /\A(POST|PUT)\z/ )
     {
         my $params = $c->req->body_params;
-        $params->{title} //= $title;
+        delete $params->{x};
         my $scritto = $c->model("DBIC::Scritto")->new($params);
         #$scritto->uuid(rand(1000000));
         $scritto->user(1);
@@ -90,3 +83,10 @@ sub preview :Chained("load") Args(0) {
     {
         die "RC_403";
     }
+
+sub default :Path {
+    my ( $self, $c ) = @_;
+    my $title ||= $c->request->arguments->[0];
+    $c->stash->{scritto} ||=
+        $c->model("DBIC::Scritto")->new({ title => $title });
+}
