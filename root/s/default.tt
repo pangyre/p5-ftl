@@ -1,5 +1,5 @@
 <p>
-There is no resource titled <b>[% scritto.title | html %]</b>. Would you like to <a href="[% c.uri_for_action("s/edit", [scritto.title]) %]">create one</a>?
+There is no resource containing <b>[% scritto.scrit | html %]</b>. Would you like to <a href="[% c.uri_for_action("s/create", c.request.param("q")) %]">create one</a>?
 </p>
 
 <p>

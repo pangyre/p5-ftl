@@ -21,8 +21,7 @@ sub index :Path Args(0) {
 sub scritto :Chained("/") PathPart("s") CaptureArgs(1) {
     my ( $self, $c, $id ) = @_;
     $id ||= $c->request->arguments->[0]; # for forwards
-    $c->stash->{scritto} = $c->model("DBIC::Scritto")->find($id);
-#        || $c->model("DBIC::Scritto")->new();
+    $c->stash->{scritto} ||= $c->model("DBIC::Scritto")->find($id);
 }
 
 sub view :PathPart("") Chained("scritto") Args(0) {
@@ -31,8 +30,9 @@ sub view :PathPart("") Chained("scritto") Args(0) {
     $c->go("default") unless $scritto->in_storage;
 }
 
-sub create :Local Args(0) { # PUT
-    my ( $self, $c ) = @_; # No id...?
+sub create :Local { # PUT
+    my ( $self, $c, $scrit, $more ) = @_; # No id...?
+    die if defined $more;
 
     if (  $c->request->method =~ /\A(POST|PUT)\z/ )
     {
@@ -47,7 +47,8 @@ sub create :Local Args(0) { # PUT
     }
     else
     {
-        $c->visit("edit");
+        $c->stash(scritto => $c->model("DBIC::Scritto")->new({ scrit => $scrit }) );
+        $c->go("edit");
     }
 }
 
@@ -56,7 +57,7 @@ sub edit :Chained("scritto") Args(0) FormConfig {
     my $scritto = $c->stash->{scritto} ||= $c->model("DBIC::Scritto")->new({});
     my $form = $c->stash->{form};
     $form->constraints_from_dbic($c->model("DBIC::Scritto"));
-    $form->model->default_values( $scritto );
+    $form->model->default_values($scritto);
 
     $form->render;
 
@@ -68,6 +69,14 @@ sub edit :Chained("scritto") Args(0) FormConfig {
     }
 
 }
+
+sub default :Path Args(0) {
+    my ( $self, $c ) = @_;
+    my $scrit = $c->request->arguments->[0];
+    $c->stash->{scritto} ||=
+        $c->model("DBIC::Scritto")->new({ scrit => $scrit });
+}
+
 
 __PACKAGE__->meta->make_immutable;
 
@@ -84,9 +93,3 @@ sub preview :Chained("load") Args(0) {
         die "RC_403";
     }
 
-sub default :Path {
-    my ( $self, $c ) = @_;
-    my $title ||= $c->request->arguments->[0];
-    $c->stash->{scritto} ||=
-        $c->model("DBIC::Scritto")->new({ title => $title });
-}

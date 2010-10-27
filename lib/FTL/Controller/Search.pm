@@ -11,20 +11,20 @@ sub index :Path Args(0) {
                                                 # { prefetch => [qw/ user /], }
         );
 
-    my $primary = $rs->search({ title => $q });
+    my $primary = $rs->search({ scrit => $q });
     my $secondary = $rs->search({
-        id => { "NOT IN" => [ map { $_->id } $primary->all ] },
         -or => [
-             title => { LIKE => '%'.$q.'%' },
-             body => { LIKE => '%'.$q.'%' },
+             scrit => { LIKE => '%'.$q.'%' },
             ],
                                 },
-#                                 {
-#                                     page => 1,
-#                                     rows => 50
-#                                 },
+                                 {
+                                     page => 1,
+                                     rows => 50
+                                 },
         );
 
+    $secondary = $secondary->search({id => { "NOT IN" => [ map { $_->id } $primary->all ] },})
+        if $primary->count;
 
     unless ( $primary->count || $secondary->count )
     {
