@@ -70,7 +70,7 @@ sub edit :Chained("scritto") Args(0) FormConfig {
 
 }
 
-sub default :Path Args(0) {
+sub default :Path  {
     my ( $self, $c ) = @_;
     my $scrit = $c->request->arguments->[0];
     $c->stash->{scritto} ||=
