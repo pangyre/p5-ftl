@@ -1,3 +1,19 @@
 <article>
 [% scritto %]
 </article>
+
+<script type="text/javascript">//<![CDATA[
+jQuery(function($){
+ var $edit = $("<textarea/>");
+ var $scrit = $("article");
+ $edit.val($scrit.html());
+
+$("article").replaceWith($edit);
+
+});
+//]]> </script>
+
+ for ( var i in ["fontSize"] )
+ {
+    $edit.css(var:$("article").css(var));
+ }
