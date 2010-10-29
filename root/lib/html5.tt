@@ -169,7 +169,7 @@ jQuery(function($) {
  </header>
  <nav>
 <ul>
- <li><a href="[% c.uri_for("/s") %]">/</a></li>
+ <li><a href="[% c.uri_for("/s") %]">/s</a></li>
  <li><a href="[% c.uri_for("/meta/db") %]">db schema</a></li>
  <li>[% PROCESS search/basic_form.tt %]</li>
  <li><a href="[% c.uri_for("/todo.txt") %]">todo</a></li>

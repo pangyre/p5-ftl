@@ -1,10 +1,11 @@
 package FTL::Schema::Result::Scritto;
 use strict;
 use warnings;
-use parent 'DBIx::Class::Core';
-use overload '""' => sub { shift->scrit }, fallback => 1;
+use parent "DBIx::Class::Core";
+use overload q{""} => sub { shift->scrit }, fallback => 1;
 
-__PACKAGE__->load_components("InflateColumn::DateTime");
+__PACKAGE__->load_components("InflateColumn::DateTime",
+                             "+FTL::Schema::Defaults");
 
 __PACKAGE__->table("scritto");
 
@@ -26,7 +27,7 @@ __PACKAGE__->add_columns(
     default_value => undef,
     extra => { unsigned => 1 },
     is_foreign_key => 1,
-    is_nullable => 0,
+    is_nullable => 1, # FOR NOW. 321
     size => 10,
   },
   "parent",
@@ -56,9 +57,18 @@ __PACKAGE__->add_columns(
   {
     data_type => "ENUM",
     default_value => "draft",
-    extra => { list => ["draft", "publish", "scritto", "manual", "deleted"] },
+    extra => { list => ["draft", "publish", "deleted"] },
     is_nullable => 1,
     size => 8,
+  },
+  "type",
+  {
+    data_type => "INT",
+    default_value => undef,
+    extra => { unsigned => 1 },
+    is_foreign_key => 1,
+    is_nullable => 1,
+    size => 10,
   },
   "created",
   {
@@ -79,6 +89,8 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("id");
 
 __PACKAGE__->belongs_to("user", "FTL::Schema::Result::User", { id => "user" }, {});
+
+__PACKAGE__->has_one("type", "FTL::Schema::Result::Type", { id => "type" }, {});
 
 __PACKAGE__->belongs_to(
   "parent",

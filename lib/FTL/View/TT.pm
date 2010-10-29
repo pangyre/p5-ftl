@@ -7,6 +7,7 @@ __PACKAGE__->config(
     ENCODING => "utf8",
     TEMPLATE_EXTENSION => '.tt',
     WRAPPER => "lib/html5.tt",
+    PRE_PROCESS        => 'meta/macros.tt',
     render_die => 1,
 );
 

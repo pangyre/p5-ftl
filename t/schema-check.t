@@ -13,25 +13,42 @@ unlink $db if -e $db;
 ok( my $schema = FTL::Schema->connect("dbi:SQLite:$db"),
     "Connecting to an SQLite dummy" );
 
-ok( ! exception {  $schema->deploy(); },
+ok( ! exception { $schema->deploy(); },
     "Deployment lives" );
 
 my $fixture = YAML::Load(join "", <DATA>);
 
-for my $row ( @{ $fixture } )
+for my $source ( keys %{ $fixture } )
 {
-    $row->{created} = \q{ datetime('now') };
-    $row->{user} ||= 1;
-    $schema->resultset("Scritto")->create($row)->update;
+    for my $rec ( @{ $fixture->{$source} } )
+    {
+        $schema->resultset($source)->create($rec);
+    }
 }
 
 done_testing();
 
-
 __END__
-- scrit: "Something something something"
-  user: 1
-- scrit: "O HAI"
-  user: 1
-- scrit: "…"
-  user: 1
+Scritto:
+  - scrit: "Something something something"
+    user: 1
+  - scrit: "…"
+    user: 1
+Type:
+  - name: "book"
+  - name: "section"
+  - name: "chapter"
+  - name: "prose"
+  - name: "dialog"
+  - name: "note"
+  - name: "notebook"
+  - name: "character"
+  - name: "character study"
+  - name: "stanza"
+  - name: "poem"
+  - name: "project"
+  - name: "scene"
+  - name: "collection"
+  - name: "chapbook"
+  - name: "magazine"
+  - name: "article"

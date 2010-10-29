@@ -3,11 +3,21 @@ use Moose;
 use namespace::autoclean;
 BEGIN { extends "Catalyst::Controller" }
 
+use DBIx::Class::Fixtures;
 use SQL::Translator;
 
 sub index :Path Args(0) {
     my ( $self, $c ) = @_;
     $c->go("schema");
+}
+
+sub populate : Local Args(0) {
+    my ( $self, $c ) = @_;
+
+}
+
+sub dump : Local Args(0) {
+
 }
 
 sub schema : Local Args(0) {
@@ -67,14 +77,5 @@ FTL::Controller::Root - Root Controller for FTL
 =head2 index
 
 The root page (/)
-
-=head1 AUTHOR
-
-apv
-
-=head1 LICENSE
-
-This library is free software. You can redistribute it and/or modify
-it under the same terms as Perl itself.
 
 =cut

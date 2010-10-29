@@ -1,0 +1,21 @@
+---
+# Baseline values for a fresh installation.
+
+Type:
+  - name: "book"
+  - name: "section"
+  - name: "chapter"
+  - name: "prose"
+  - name: "dialog"
+  - name: "note"
+  - name: "notebook"
+  - name: "character"
+  - name: "character study"
+  - name: "stanza"
+  - name: "poem"
+  - name: "project"
+  - name: "scene"
+  - name: "collection"
+  - name: "chapbook"
+  - name: "magazine"
+  - name: "article"

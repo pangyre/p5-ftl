@@ -1,0 +1,12 @@
+[% MACRO s_uri(s,text) BLOCK~%]
+  [%~c.uri_for("/s", s.id)~%]
+[%~END %]
+
+[% MACRO s_link(s,text) BLOCK~%]
+  [%~DEFAULT text = s.scrit~%]
+  <a href="[%~c.uri_for("/s", s.id)~%]" title="[% text | truncate(100,"…") | html %]">[% text | html %]
+[%~END %]
+
+[%~MACRO s_edit_uri(s) BLOCK~%]
+  [% c.uri_for_action("/s/edit", s.id) %]
+[%~END~%]

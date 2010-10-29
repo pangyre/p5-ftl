@@ -1,7 +1,8 @@
 package FTL::Schema::ResultSet::Scritto;
 use strict;
 use warnings;
-use parent "DBIx::Class::ResultSet";
+use parent "DBIx::Class::ResultSet::HashRef";
+
 
 
 1;
