@@ -2,6 +2,7 @@ package FTL;
 use Moose;
 use namespace::autoclean;
 use Catalyst::Runtime 5.80;
+use URI;
 
 use Catalyst qw/
                 Unicode::Encoding
@@ -12,8 +13,7 @@ use Catalyst qw/
 extends 'Catalyst';
 
 our $VERSION = '0.01';
-$VERSION = eval $VERSION;
-
+our $AUTHORITY = "cpan:ASHLEY";
 
 __PACKAGE__->config(
     "Plugin::ConfigLoader" => {
@@ -22,13 +22,28 @@ __PACKAGE__->config(
     },
     static => {
         debug => 1,
-#        dirs => [ "static", "../3rd" ],
+        #dirs => [ "static" ],
         include_path => [ __PACKAGE__->path_to('root/static'), ],
         ignore_extensions => [],
     },
 );
 
+has "repository" => 
+    is => "ro",
+    isa => "URI",
+    lazy => 1,
+    default => sub { URI->new("http://github.com/pangyre/p5-yesh") };
+
+sub name {
+    my $c = shift;
+    $c->{name} ||= $c->config->{name};
+}
+
+sub version { $VERSION }
+
 __PACKAGE__->setup();
+
+__PACKAGE__->meta->make_immutable;
 
 1;
 
