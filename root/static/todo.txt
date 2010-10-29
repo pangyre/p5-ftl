@@ -1,13 +1,23 @@
 Tables
 
-* author
-* scrit
-* type
-* tag
-* style
-* timeline
-* sequence
-* property
-* associator
-* source
+(x)author
+(x)scrit 
+(x)type
+(x)tag
+ * style
+     What about the meta/mime stuff?
+ * timeline
+     The order of events within an entire tree. For charting and
+     organization, not publication.
+ * sequence
+     Is the order of the children of a node. For publication!
+ * property
+     Data private to a node.
+ * associator
+     Rules for linking within scritti to this one.
+ * source
+     For collections so that a UUID can be used in place of new or
+     copied data.
+
+Google config like the yesh3 one for external view to jQuery.
 
