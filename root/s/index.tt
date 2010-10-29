@@ -1,5 +1,5 @@
 [% FOR scrit IN scritti.all %]
   <li>
-   [% s_link(scrit) %]
+   [% s_link(scrit) %] [% s_edit_link(scrit,"edit") %]
   </li>
 [% END %]

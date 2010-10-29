@@ -22,6 +22,7 @@ sub scritto :Chained("/") PathPart("s") CaptureArgs(1) {
     my ( $self, $c, $id ) = @_;
     $id ||= $c->request->arguments->[0]; # for forwards
     $c->stash->{scritto} ||= $c->model("DBIC::Scritto")->find($id);
+    $c->stash->{scritto}->id || die "404: $id";
 }
 
 sub view :PathPart("") Chained("scritto") Args(0) {
@@ -43,7 +44,8 @@ sub create :Local { # PUT
         $scritto->user(1);
         $scritto->created("now");
         $scritto->insert_or_update;
-        $c->go("index"); # 321 redirect I think.
+        $c->response->redirect( $c->uri_for_action("/s/view",[$scritto->id]) );
+        # $c->go("index"); # 321 redirect I think.
     }
     else
     {
@@ -66,8 +68,17 @@ sub edit :Chained("scritto") Args(0) FormConfig {
         $scritto->user(1);
         $scritto->created(\q{datetime('now')});
         $form->model->update($scritto);
+        $c->response->redirect( $c->uri_for_action("/s/view",[$scritto->id]) );
     }
+}
 
+sub ajax_edit :Chained("scritto") Args(0) {
+    my ( $self, $c ) = @_;
+    my $scritto = $c->stash->{scritto} or die "No scritto...";# ||= $c->model("DBIC::Scritto")->new({});
+    # $scritto->$_($c->req->param($_)) for $scritto->columns;
+    $scritto->scrit($c->req->param("value"));
+    $scritto->update();
+    $c->response->body($scritto);
 }
 
 sub default :Path  {

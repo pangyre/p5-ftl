@@ -20,6 +20,7 @@ my $fixture = YAML::Load(join "", <DATA>);
 
 for my $source ( keys %{ $fixture } )
 {
+    # $schema->resultset($source)->populate($fixture->{$source}); 
     for my $rec ( @{ $fixture->{$source} } )
     {
         $schema->resultset($source)->create($rec);

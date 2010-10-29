@@ -2,7 +2,10 @@ package FTL::Schema::Result::Scritto;
 use strict;
 use warnings;
 use parent "DBIx::Class::Core";
-use overload q{""} => sub { shift->scrit }, fallback => 1;
+use overload q{""} => sub {
+    my $self = shift;
+    $self->scrit || $self->id;
+}, fallback => 1;
 
 __PACKAGE__->load_components("InflateColumn::DateTime",
                              "+FTL::Schema::Defaults");
