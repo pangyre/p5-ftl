@@ -109,7 +109,7 @@ __PACKAGE__->belongs_to(
 );
 
 __PACKAGE__->has_many(
-  "scrittos",
+  "children",
   "FTL::Schema::Result::Scritto",
   { "foreign.parent" => "self.id" },
 );

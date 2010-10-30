@@ -1,7 +1,7 @@
 <html lang="en">
  <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>[% title || c.config.name %]</title>
+  <title>[% title || c.name %]</title>
   <link rel="stylesheet" type="text/css" href="[% c.uri_for("/css/universal.css") %]" />
 [%-# feed, prev, next, opensearch, etc %]
   <link rel="shortcut icon" href="/favicon.ico" />
@@ -157,6 +157,17 @@ textarea {
 }
 
 .typePoem {
+ white-space:pre-wrap;
+ font-size:120%;
+ line-height:125%;
+ margin-bottom:1ex;
+}
+.typeStanza {
+ white-space:pre-wrap;
+ font-size:100%;
+ line-height:125%;
+}
+.typeProse {
  white-space:pre-wrap;
 }
 

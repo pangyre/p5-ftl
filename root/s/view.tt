@@ -2,6 +2,12 @@
 [%~scritto.scrit~%]
 </article>
 
+[% FOR kid IN scritto.children %]
+<article class="type[% ( kid.type || "none" ) | ucfirst %]">
+[%~kid.scrit~%]
+</article>
+[% END %]
+
 <aside>
   <input type="text" placeholder="What is this?" class="type" value="[% scritto.type | html %]" />
 </aside>
@@ -36,7 +42,7 @@ $(document).ready(function() {
       type: "POST"
       ,url: "[% c.uri_for_action("/s/type_edit", [ scritto.id ]) %]"
       ,data: { type:name, scritto:[% scritto.id %] }
-//      ,success: function(){ alert("OK") }
+      ,success: function(){ $("article").attr({class:false}).addClass("type" + name.substr(0,1).toUpperCase() + name.substr(1,this.length)) }
       ,error: function(){ alert("OH NOES") }
     });
   });
