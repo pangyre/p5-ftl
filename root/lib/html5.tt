@@ -156,7 +156,7 @@ textarea {
  width:100%;
 }
 
-.poem {
+.typePoem {
  white-space:pre-wrap;
 }
 

@@ -1,10 +1,9 @@
-<article class="autogrow[% " " _ scritto.type IF scritto.type %]">
+<article class="autogrow type[% ( scritto.type || "none" ) | ucfirst %]">
 [%~scritto.scrit~%]
 </article>
+
 <aside>
-[% UNLESS scritto.type %]
-What is this?
-[% END %]
+  <input type="text" placeholder="What is this?" class="type" value="[% scritto.type | html %]" />
 </aside>
 
 <script src="[% c.uri_for("/3rd/jquery/jquery.jeditable.js") %]" type="text/javascript"></script>
@@ -30,6 +29,18 @@ $(document).ready(function() {
            minHeight  : 32
         }
     });
+
+  $("input.type").change(function(){
+   var name = $(this).val();
+   $.ajax({
+      type: "POST"
+      ,url: "[% c.uri_for_action("/s/type_edit", [ scritto.id ]) %]"
+      ,data: { type:name, scritto:[% scritto.id %] }
+//      ,success: function(){ alert("OK") }
+      ,error: function(){ alert("OH NOES") }
+    });
+  });
+
 });
 //]]></script>  
 

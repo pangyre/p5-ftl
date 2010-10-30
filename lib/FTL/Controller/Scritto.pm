@@ -83,6 +83,17 @@ sub ajax_edit :Chained("scritto") Args(0) {
     $c->response->body($scritto->scrit);
 }
 
+sub type_edit :Chained("scritto") Args(0) {
+    my ( $self, $c ) = @_;
+    my $scritto = $c->stash->{scritto} or die "No scritto...";
+    my $name = $c->req->param("type");
+    die "No name" unless $name;
+    my $type = $c->model("DBIC::Type")->find_or_create({name => $name});
+    $scritto->type($type);
+    $scritto->update();
+    $c->response->body("OK");
+}
+
 sub default :Path  {
     my ( $self, $c ) = @_;
     my $scrit = $c->request->arguments->[0];
