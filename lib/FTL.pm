@@ -32,7 +32,7 @@ has "repository" =>
     is => "ro",
     isa => "URI",
     lazy => 1,
-    default => sub { URI->new("http://github.com/pangyre/p5-yesh") };
+    default => sub { URI->new("http://github.com/pangyre/p5-ftl") };
 
 sub name {
     my $c = shift;

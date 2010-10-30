@@ -1,7 +1,40 @@
-<article class="autogrow">
+<article class="autogrow[% " " _ scritto.type IF scritto.type %]">
 [%~scritto.scrit~%]
 </article>
+<aside>
+[% UNLESS scritto.type %]
+What is this?
+[% END %]
+</aside>
 
+<script src="[% c.uri_for("/3rd/jquery/jquery.jeditable.js") %]" type="text/javascript"></script>
+<script src="[% c.uri_for("/3rd/jquery/jquery.jeditable.autogrow.js") %]" type="text/javascript"></script>
+<script src="[% c.uri_for("/3rd/jquery/jquery.autogrow.js") %]" type="text/javascript"></script>
+
+<script type="text/javascript" charset="utf-8">//<![CDATA[
+$(document).ready(function() {
+
+    $(".autogrow").editable("[% c.uri_for_action("/s/ajax_edit", [scritto.id]) %]", { 
+        indicator  : "<img src='[% c.uri_for("/3rd/img/indicator.gif") %]'>"
+//         type: "POST"
+//        ,dataType: "json"
+//                ,data: {value:value}
+        ,type      : "autogrow"
+        ,submit    : "Update"
+        ,cancel    : "Cancel"
+        ,tooltip   : "Click to edit"
+        ,onblur    : "ignore"
+        ,event     : "dblclick"
+        ,autogrow  : {
+           lineHeight : 16,
+           minHeight  : 32
+        }
+    });
+});
+//]]></script>  
+
+
+[% RETURN %]
 <script type="text/javascript">//<![CDATA[
 jQuery(function($){
   var $edit = $("<textarea/>");
@@ -10,39 +43,3 @@ jQuery(function($){
   // onclick, and then send to edit $("article").replaceWith($edit);
 });
 //]]> </script>
-
-
-
-<script src="[% c.uri_for("/3rd/jquery/jquery.jeditable.js") %]" type="text/javascript"></script>
-<script src="[% c.uri_for("/3rd/jquery/jquery.jeditable.autogrow.js") %]" type="text/javascript"></script>
-<script src="[% c.uri_for("/3rd/jquery/jquery.jeditable.ajaxupload.js") %]" type="text/javascript"></script>
-<script src="[% c.uri_for("/3rd/jquery/jquery.jeditable.masked.js") %]" type="text/javascript"></script>
-<script src="[% c.uri_for("/3rd/jquery/jquery.jeditable.time.js") %]" type="text/javascript"></script>
-<script src="[% c.uri_for("/3rd/jquery/jquery.jeditable.timepicker.js") %]" type="text/javascript"></script>
-<script src="[% c.uri_for("/3rd/jquery/jquery.jeditable.datepicker.js") %]" type="text/javascript"></script>
-<script src="[% c.uri_for("/3rd/jquery/jquery.jeditable.charcounter.js") %]" type="text/javascript"></script>
-<script type="text/javascript" src="[% c.uri_for("/3rd/jquery/jquery.maskedinput.js") %]"></script>
-<script type="text/javascript" src="[% c.uri_for("/3rd/jquery/jquery.timepicker.js") %]"></script>
-<script type="text/javascript" src="[% c.uri_for("/3rd/jquery/jquery.autogrow.js") %]"></script>
-<script type="text/javascript" src="[% c.uri_for("/3rd/jquery/jquery.charcounter.js") %]"></script>
-<script type="text/javascript" src="[% c.uri_for("/3rd/jquery/jquery.ajaxfileupload.js") %]"></script>
-
-<script type="text/javascript" charset="utf-8">
-// <![CDATA[
-$(document).ready(function() {
-
-    $(".autogrow").editable("[% c.uri_for_action("/s/ajax_edit", [scritto.id]) %]", { 
-        indicator : "<img src='[% c.uri_for("/3rd/img/indicator.gif") %]'>",
-        type      : "autogrow",
-        submit    : 'OK',
-        cancel    : 'cancel',
-        tooltip   : "Click to edit...",
-        onblur    : "ignore",
-        autogrow  : {
-           lineHeight : 16,
-           minHeight  : 32
-        }
-    });
-});
-// ]]>
-</script>  

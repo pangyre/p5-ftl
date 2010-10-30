@@ -93,7 +93,13 @@ __PACKAGE__->set_primary_key("id");
 
 __PACKAGE__->belongs_to("user", "FTL::Schema::Result::User", { id => "user" }, {});
 
-__PACKAGE__->has_one("type", "FTL::Schema::Result::Type", { id => "type" }, {});
+__PACKAGE__->belongs_to("type", "FTL::Schema::Result::Type");
+
+#__PACKAGE__->might_have("type", "FTL::Schema::Result::Type");
+#__PACKAGE__->belongs_to("type", "FTL::Schema::Result::Type");
+#__PACKAGE__->belongs_to("type", "FTL::Schema::Result::Type");
+#__PACKAGE__->might_have("type", "FTL::Schema::Result::Type", { id => "type" }, {});
+#__PACKAGE__->has_one("type", "FTL::Schema::Result::Type", { id => "type" }, {});
 
 __PACKAGE__->belongs_to(
   "parent",

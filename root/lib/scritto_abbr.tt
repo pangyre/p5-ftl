@@ -1,8 +1,4 @@
 <article>
-<h1>
-  [% scritto.title | html %]
-</h1>
-<div>
-  [% scritto.body | html %]
-</div>
+  [% s_edit_link(scritto, "edit") %]
+  <a href="[% s_uri(scritto) %]">[% scritto.scrit | truncate(250) | html %]
 </article>

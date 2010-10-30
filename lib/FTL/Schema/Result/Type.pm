@@ -2,6 +2,10 @@ package FTL::Schema::Result::Type;
 use warnings;
 use strict;
 use parent 'DBIx::Class::Core';
+use overload q{""} => sub {
+    my $self = shift;
+    $self->name || $self->id;
+}, fallback => 1;
 
 __PACKAGE__->load_components("+FTL::Schema::Defaults");
 
@@ -47,7 +51,9 @@ __PACKAGE__->add_columns(
     size => 14,
   },
 );
+
 __PACKAGE__->set_primary_key("id");
+
 __PACKAGE__->has_many(
   "scritti",
   "FTL::Schema::Result::Scritto",

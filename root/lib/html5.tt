@@ -136,8 +136,7 @@ footer {
   background:#fff url([% c.uri_for("/img/layout/ftl-footer-fade.jpg") %]) repeat-x scroll left top;
 */
  min-height:151px;
- 
-}
+ }
 .border {
  border:1px solid #99a;
  border:1px solid #aab;
@@ -156,6 +155,11 @@ footer {
 textarea {
  width:100%;
 }
+
+.poem {
+ white-space:pre-wrap;
+}
+
 </style>
 <script type="text/javascript">//<![CDATA[
 jQuery(function($) {
@@ -196,7 +200,7 @@ jQuery(function($) {
 FTL is free open source software released under
 the <a itemprop="license"
        href="http://www.perlfoundation.org/artistic_license_2_0">Artistic
-    License 2.0</a> &middot; <a href="http://github.com/pangyre/p5-ftl">FTL on Github</a>
+    License 2.0</a> &middot; <a href="[% c.repository %]">FTL on Github</a>
   </small>
  </footer>
  </body>

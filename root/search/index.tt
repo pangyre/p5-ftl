@@ -5,6 +5,7 @@
 [% IF primary.count AND secondary.count %]
 <h3>Best matches</h3>
 [% END %]
+
 [% FOR scritto IN primary.all %]
   [% PROCESS lib/scritto_abbr.tt %]
 [% END %]
@@ -12,6 +13,7 @@
 [% IF ( primary.count AND secondary.count ) %]
 <h3>More matches</h3>
 [% END %]
+
 [% FOR scritto IN secondary.all %]
   [% PROCESS lib/scritto_abbr.tt %]
 [% END %]

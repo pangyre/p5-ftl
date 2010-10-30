@@ -12,4 +12,5 @@ Model::DBIC:
     - RaiseError: 1
       AutoCommit: 1
       ChopBlanks: 1
+      ShowErrorStatement: 1
       sqlite_unicode: 1
