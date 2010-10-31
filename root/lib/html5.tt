@@ -123,10 +123,9 @@ aside
  width: 30%;
  padding:  0;
  margin: 0 0 0 0;
- display: inline;
- overflow:hidden;
- position:relative;
- top:0;
+ display:block;
+ overflow:display;
+ height:0;
 }
 
 footer {
@@ -159,23 +158,23 @@ textarea {
  width:100%;
 }
 
-.typeBook,
-.typeChapter,
-.typePoem {
+.typeBook > div,
+.typeChapter > div,
+.typePoem > div {
  white-space:pre-wrap;
  font-size:20px;
  line-height:125%;
- margin-bottom:1ex;
+ margin-bottom:10px;
 }
-.typeBook {
+.typeBook > div {
  font-size:30px;
 }
-.typeStanza {
+.typeStanza > div {
  white-space:pre-wrap;
  font-size:12px;
  line-height:125%;
 }
-.typeProse {
+.typeProse > div {
  font-size:13px;
  line-height:125%;
  white-space:pre-wrap;
