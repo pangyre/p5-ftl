@@ -3,7 +3,14 @@ use strict;
 use warnings;
 use parent "DBIx::Class::ResultSet::HashRef";
 
+sub root {
+    my $self = shift;
+    $self->search({parent => ['',undef]});
+}
 
+sub root_rs {
+    scalar +shift->root;
+}
 
 1;
 

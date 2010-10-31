@@ -111,7 +111,7 @@ width: 100%;
 #content .body {
 clear: left;
 float: left;
-width: 60%;
+width: 90%;
 padding: 1em 0 1.7em 0;
 margin: 0 0 0 5%;
 display: inline;
@@ -120,12 +120,15 @@ display: inline;
 aside
 {
  float: right;
- width: 35%;
+ width: 30%;
  padding:  0;
- margin: 0 2% 0 0;
+ margin: 0 0 0 0;
  display: inline;
  overflow:hidden;
+ position:relative;
+ top:0;
 }
+
 footer {
  border-top:1px solid #445;
  clear:both;
@@ -156,18 +159,25 @@ textarea {
  width:100%;
 }
 
+.typeBook,
+.typeChapter,
 .typePoem {
  white-space:pre-wrap;
- font-size:120%;
+ font-size:20px;
  line-height:125%;
  margin-bottom:1ex;
 }
+.typeBook {
+ font-size:30px;
+}
 .typeStanza {
  white-space:pre-wrap;
- font-size:100%;
+ font-size:12px;
  line-height:125%;
 }
 .typeProse {
+ font-size:13px;
+ line-height:125%;
  white-space:pre-wrap;
 }
 

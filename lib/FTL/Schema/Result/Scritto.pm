@@ -12,6 +12,8 @@ __PACKAGE__->load_components("InflateColumn::DateTime",
 
 __PACKAGE__->table("scritto");
 
+__PACKAGE__->resultset_attributes({ order_by => "me.created DESC" });
+
 __PACKAGE__->add_columns(
   "id",
   {

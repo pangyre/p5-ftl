@@ -1,3 +1,27 @@
+<script src="[% c.uri_for("/3rd/jquery/jquery.jeditable.js") %]" type="text/javascript"></script>
+<script src="[% c.uri_for("/3rd/jquery/jquery.jeditable.autogrow.js") %]" type="text/javascript"></script>
+<script src="[% c.uri_for("/3rd/jquery/jquery.autogrow.js") %]" type="text/javascript"></script>
+
+[% PROCESS s/display_scritto.tt %]
+
+<script type="text/javascript" charset="utf-8">//<![CDATA[
+  $("input.type").change(function(){
+   var name = $(this).val();
+   var sid = $(this).attr("name").split(".")[1];
+   $.ajax({
+      type: "POST"
+      ,url: "[% c.uri_for("/s") %]/"+sid+"/type_edit"
+      ,data: { type:name }
+      ,success: function(){ $("article").attr({class:false}).addClass("type" + name.substr(0,1).toUpperCase() + name.substr(1,this.length)) }
+      ,error: function(){ alert("OH NOES") }
+    });
+  });
+//]]> </script>
+
+
+
+[% RETURN %]
+
 <article class="autogrow type[% ( scritto.type || "none" ) | ucfirst %]">
 [%~scritto.scrit~%]
 </article>
@@ -11,10 +35,6 @@
 <aside>
   <input type="text" placeholder="What is this?" class="type" value="[% scritto.type | html %]" />
 </aside>
-
-<script src="[% c.uri_for("/3rd/jquery/jquery.jeditable.js") %]" type="text/javascript"></script>
-<script src="[% c.uri_for("/3rd/jquery/jquery.jeditable.autogrow.js") %]" type="text/javascript"></script>
-<script src="[% c.uri_for("/3rd/jquery/jquery.autogrow.js") %]" type="text/javascript"></script>
 
 <script type="text/javascript" charset="utf-8">//<![CDATA[
 $(document).ready(function() {
@@ -37,6 +57,7 @@ $(document).ready(function() {
     });
 
   $("input.type").change(function(){
+   var name = $(this).val();
    var name = $(this).val();
    $.ajax({
       type: "POST"

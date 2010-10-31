@@ -15,7 +15,7 @@ has "rows" =>
 sub index :Path Args(0) {
     my ( $self, $c ) = @_;
     $c->stash(
-        scritti => $c->model("DBIC::Scritto")->search_rs(undef,{page=>1,rows=>$self->rows})
+        scritti => $c->model("DBIC::Scritto")->root_rs
                );
 }
 
