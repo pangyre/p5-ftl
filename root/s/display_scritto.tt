@@ -1,0 +1,31 @@
+<article id="scritto_[% scritto.id %]" class="autogrow type[% ( scritto.type || "none" ) | ucfirst %]">
+<aside>
+<input type="text" name="scritto.[% scritto.id %].type" placeholder="What is this?" class="type" value="[% scritto.type | html %]" />
+</aside>
+<div>[% scritto.scrit %]</div>
+[% FOR kid IN scritto.children %]
+  [% INCLUDE s/display_scritto.tt scritto = kid %]
+[% END %]
+</article>
+
+<script type="text/javascript" charset="utf-8">//<![CDATA[
+$(document).ready(function() {
+    $("#scritto_[% scritto.id %] div").editable("[% c.uri_for_action("/s/ajax_edit", [scritto.id]) %]", { 
+        indicator  : "<img src='[% c.uri_for("/3rd/img/indicator.gif") %]'>"
+//         type: "POST"
+//        ,dataType: "json"
+//                ,data: {value:value}
+        ,type      : "autogrow"
+        ,submit    : "Update"
+        ,cancel    : "Cancel"
+        ,tooltip   : "Click to edit"
+        ,onblur    : "ignore"
+        ,event     : "dblclick"
+        ,autogrow  : {
+           lineHeight : 16,
+           minHeight  : 32
+        }
+    });
+
+});
+//]]></script>
