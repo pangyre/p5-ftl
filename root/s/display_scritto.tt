@@ -1,6 +1,12 @@
+[% DEFAULT root = scritto %]
 <article id="scritto_[% scritto.id %]" class="autogrow type[% ( scritto.type || "none" ) | ucfirst %]">
 <aside>
-<input type="text" name="scritto.[% scritto.id %].type" placeholder="What is this?" class="type" value="[% scritto.type | html %]" />
+<input
+style="border:none;display:inline;background:inherit!important;border-left:1px
+dotted gray; padding-left:1ex"
+type="text" name="scritto.[% scritto.id %].type" placeholder="What is this?" class="type" value="[% scritto.type | html %]" />
+[% s_link(scritto, "[view]") IF root.id != scritto.id %]
+
 </aside>
 <div>[% scritto.scrit %]</div>
 [% FOR kid IN scritto.children %]

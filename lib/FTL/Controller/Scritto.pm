@@ -29,6 +29,8 @@ sub view :PathPart("") Chained("scritto") Args(0) {
     my ( $self, $c ) = @_;
     my $scritto = $c->stash->{scritto};
     $c->go("default") unless $scritto->in_storage;
+    $c->stash( title => $scritto->scrit )
+        unless $scritto->parent;
 }
 
 sub create :Local { # PUT

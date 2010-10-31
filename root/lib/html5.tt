@@ -117,6 +117,9 @@ margin: 0 0 0 5%;
 display: inline;
 
 }
+article > div {
+ margin-right:35%;
+}
 aside
 {
  float: right;
