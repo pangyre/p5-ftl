@@ -24,9 +24,11 @@ jQuery(function($){
  };
 
  $("input.type").each(function(){
-    $(this).autocomplete({
+    var $field = $(this);
+    $field.autocomplete({
         source:"[% c.uri_for("/type/autocomplete") %]"
         ,delay:100
+        ,select:function(){ $field.trigger("change"); }
         ,minLenght:1
     })
      .data("autocomplete")._renderItem = renderItem;
