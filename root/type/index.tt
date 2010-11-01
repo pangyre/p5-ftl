@@ -1,0 +1,7 @@
+<ol>
+[% FOR type IN types.all %]
+  <li>
+  [% type %]
+  </li>
+[% END %]
+</ol>

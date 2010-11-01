@@ -19,13 +19,13 @@ sub index :Path Args(0) {
                );
 }
 
-sub scritto :Chained("/") PathPart("s") CaptureArgs(1) {
+sub load :Chained("/") PathPart("s") CaptureArgs(1) {
     my ( $self, $c, $id ) = @_;
     $id ||= $c->request->arguments->[0]; # for forwards
     $c->stash->{scritto} ||= $c->model("DBIC::Scritto")->find($id);
 }
 
-sub view :PathPart("") Chained("scritto") Args(0) {
+sub view :PathPart("") Chained("load") Args(0) {
     my ( $self, $c ) = @_;
     my $scritto = $c->stash->{scritto};
     $c->go("default") unless $scritto->in_storage;
@@ -56,7 +56,7 @@ sub create :Local { # PUT
     }
 }
 
-sub edit :Chained("scritto") Args(0) FormConfig {
+sub edit :Chained("load") Args(0) FormConfig {
     my ( $self, $c ) = @_;
     my $scritto = $c->stash->{scritto} ||= $c->model("DBIC::Scritto")->new({});
     my $form = $c->stash->{form};
@@ -74,7 +74,7 @@ sub edit :Chained("scritto") Args(0) FormConfig {
     }
 }
 
-sub ajax_edit :Chained("scritto") Args(0) {
+sub ajax_edit :Chained("load") Args(0) {
     my ( $self, $c ) = @_;
     my $scritto = $c->stash->{scritto} or die "No scritto...";# ||= $c->model("DBIC::Scritto")->new({});
     # $scritto->$_($c->req->param($_)) for $scritto->columns;
@@ -85,7 +85,7 @@ sub ajax_edit :Chained("scritto") Args(0) {
     $c->response->body($scritto->scrit);
 }
 
-sub type_edit :Chained("scritto") Args(0) {
+sub type_edit :Chained("load") Args(0) {
     my ( $self, $c ) = @_;
     my $scritto = $c->stash->{scritto} or die "No scritto...";
     my $name = $c->req->param("type");
@@ -102,7 +102,6 @@ sub default :Path  {
     $c->stash->{scritto} ||=
         $c->model("DBIC::Scritto")->new({ scrit => $scrit });
 }
-
 
 __PACKAGE__->meta->make_immutable;
 

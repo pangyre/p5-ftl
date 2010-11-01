@@ -3,6 +3,7 @@ use Moose;
 use namespace::autoclean;
 use Catalyst::Runtime 5.80;
 use URI;
+use feature ":5.10";
 
 use Catalyst qw/
                 Unicode::Encoding

@@ -2,10 +2,43 @@ package FTL::Controller::Type;
 use Moose;
 use namespace::autoclean;
 BEGIN { extends "Catalyst::Controller" }
+use feature ":5.10";
+sub index :Path Args(0) {
+    my ( $self, $c ) = @_;
+    $c->stash( types => $c->model("DBIC::Type")->search_rs );
+}
 
-#sub index :Path Args(0) {
-#    my ( $self, $c ) = @_;
-#}
+sub load :Chained("/") PathPart("type") CaptureArgs(1) {
+    my ( $self, $c, $id ) = @_;
+    $id ||= $c->request->arguments->[0]; # for forwards
+    $c->stash->{type} ||= $c->model("DBIC::Type")->find($id);
+}
+
+sub rest :PathPart("") Chained("load") Args(0) {
+    my ( $self, $c ) = @_;
+    my $type = $c->stash->{type};
+    given ( $c->request->method )
+    {
+        when ( "GET" )    { $c->forward("view") }
+        when ( "POST" )   { $c->forward("edit") }
+        when ( "PUT" )    { $c->forward("create") }
+        when ( "DELETE" ) { $c->forward("delete") }
+    }
+}
+
+sub create :Private { # PUT
+    my ( $self, $c ) = @_;
+    my $type = $c->stash->{type};
+    my $params = $c->req->body_params;
+    my $type = $c->model("DBIC::Type")->new($params);
+    $type->insert_or_update;
+    $c->response->redirect( $c->uri_for_action("/type/view",[$type->id]) );
+}
+
+sub edit :Private { # POST
+    my ( $self, $c ) = @_;
+    my $type = $c->stash->{type};
+}
 
 sub autocomplete :Local {
     my ( $self, $c ) = @_;
