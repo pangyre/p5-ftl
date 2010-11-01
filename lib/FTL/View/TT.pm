@@ -4,6 +4,7 @@ use warnings;
 use parent "Catalyst::View::TT";
 
 __PACKAGE__->config(
+    TRIM => 1,
     ENCODING => "utf8",
     TEMPLATE_EXTENSION => '.tt',
     WRAPPER => "lib/html5.tt",

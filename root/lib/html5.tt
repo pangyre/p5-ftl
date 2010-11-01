@@ -5,13 +5,14 @@
   <link rel="stylesheet" type="text/css" href="[% c.uri_for("/css/universal.css") %]" />
 [%-# feed, prev, next, opensearch, etc %]
   <link rel="shortcut icon" href="/favicon.ico" />
-[%-IF site.use_google_js %]
+[%-IF c.config.use_google_js %]
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 [% ELSE %]
 <script type="text/javascript" src="[% c.uri_for("/3rd/jquery/jquery.min.js") %]"></script>
 <script type="text/javascript" src="[% c.uri_for("/3rd/jquery/jquery-ui.min.js") %]"></script>
 [%-END %]
+<link href="[% c.uri_for("/3rd/jquery/css/overcast/jquery-ui.css") %]" rel="stylesheet" type="text/css">
 <style type="text/css">
 img {
  border:none;

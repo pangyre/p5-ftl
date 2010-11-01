@@ -13,20 +13,20 @@
 
 [% PROCESS s/display_scritto.tt %]
 
-
 <script type="text/javascript">//<![CDATA[
-jQuery(function($) {
+jQuery(function($){
  var renderItem = function(ul,item) {
+     item.value = item.name;
      return $( "<li></li>" )
          .data( "item.autocomplete", item )
-         .append( "<a>" + item.label + "<br /> &#8680; " + item.desc + "</a>" )
+         .append( "<a>" + item.name + "</a>" )
          .appendTo( ul );
  };
 
- $("input[name='type']").autocomplete({
+ $("input.type").autocomplete({
     source:"[% c.uri_for("/type/autocomplete") %]"
-    ,delay:300
-    ,minLenght:2
+    ,delay:100
+    ,minLenght:1
   })
   .data("autocomplete")._renderItem = renderItem;
 

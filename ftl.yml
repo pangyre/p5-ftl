@@ -2,6 +2,7 @@
 name: "FTL"
 default_view: "TT"
 default_model: "DBIC"
+use_google_js: 1
 
 # MODELS -------------------------------------------------
 Model::DBIC:
