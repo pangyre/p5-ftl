@@ -23,13 +23,14 @@ jQuery(function($){
          .appendTo( ul );
  };
 
- $("input.type").autocomplete({
-    source:"[% c.uri_for("/type/autocomplete") %]"
-    ,delay:100
-    ,minLenght:1
-  })
-  .data("autocomplete")._renderItem = renderItem;
-
+ $("input.type").each(function(){
+    $(this).autocomplete({
+        source:"[% c.uri_for("/type/autocomplete") %]"
+        ,delay:100
+        ,minLenght:1
+    })
+     .data("autocomplete")._renderItem = renderItem;
+  });
 });
 //]]> </script>
 
