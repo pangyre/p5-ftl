@@ -2,7 +2,7 @@
   <fieldset>
     <legend>Basic search</legend>
     <div>
-      <input name="q" type="text" value="" />
+      <input name="q" type="text" placeholder="Search me…" value="[% c.request.param("q") | html %]" />
       <input name="go" type="submit" value="go" />
     </div>
   </fieldset>
