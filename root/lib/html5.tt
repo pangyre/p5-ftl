@@ -202,6 +202,7 @@ jQuery(function($) {
  <li><a href="[% c.uri_for("/meta/db") %]">db schema</a></li>
  <li>[% PROCESS search/basic_form.tt %]</li>
  <li><a href="[% c.uri_for("/todo.txt") %]">todo</a></li>
+ <li><a href="[% c.uri_for("/type") %]">type</a></li>
  <li><a href="[% c.uri_for("/s/create") %]">create</a></li>
 </ul>
 

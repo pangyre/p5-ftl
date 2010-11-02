@@ -14,23 +14,40 @@ sub load :Chained("/") PathPart("type") CaptureArgs(1) {
     $c->stash->{type} ||= $c->model("DBIC::Type")->find($id);
 }
 
-sub rest :PathPart("") Chained("load") Args(0) {
+sub rest :Chained("load") Args(0) {
     my ( $self, $c ) = @_;
     my $type = $c->stash->{type};
     given ( $c->request->method )
     {
-        when ( "GET" )    { $c->forward("view") }
+        when ( "GET" )    { $c->go("view") }
         when ( "POST" )   { $c->forward("edit") }
         when ( "PUT" )    { $c->forward("create") }
         when ( "DELETE" ) { $c->forward("delete") }
     }
 }
 
+sub view :Private {
+    my ( $self, $c ) = @_;
+}
+
+sub delete :Private {
+    my ( $self, $c ) = @_;
+    my $type = $c->stash->{type};
+    if ( $type->scritti )
+    {
+        $c->res->status(406);
+        $c->res->body("WTF? That type has things and junk.");
+        $c->detach;
+    }
+    $type->delete;
+    $c->response->status(204);
+}
+
 sub create :Private { # PUT
     my ( $self, $c ) = @_;
     my $type = $c->stash->{type};
     my $params = $c->req->body_params;
-    my $type = $c->model("DBIC::Type")->new($params);
+    $type = $c->model("DBIC::Type")->new($params);
     $type->insert_or_update;
     $c->response->redirect( $c->uri_for_action("/type/view",[$type->id]) );
 }
