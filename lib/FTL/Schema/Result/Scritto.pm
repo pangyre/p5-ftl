@@ -2,6 +2,7 @@ package FTL::Schema::Result::Scritto;
 use strict;
 use warnings;
 use parent "DBIx::Class::Core";
+use Carp;
 use overload q{""} => sub {
     my $self = shift;
     $self->scrit || $self->id;
@@ -144,10 +145,10 @@ use DBIx::Class::Exception ();
 
 sub parents {
     my ( $self, @parents ) = @_;
-    my $parent = $self->parent;
-    return @parents unless $parent;
+    return @parents unless my $parent = $self->parent;
     unshift @parents, $parent;
-    die "Unterminating lineage loop suspected!" if @parents > 50;
+    croak "Circular lineage"
+        if grep { $self->id eq $_->id } @parents;
     $parent->parents(@parents);
 }
 
@@ -160,6 +161,25 @@ sub root {
     my $self = shift;
     my @parents = $self->parents;
     return $parents[0];
+}
+
+sub insert {
+    my $self = shift;
+    $self->next::method(@_);
+    if ( $self->parent eq $self->id )
+    {
+        $self->parent(undef);
+        $self->update();
+        croak "Cannot be a parent to oneself outside of bad sci-fi";
+    }
+    $self;
+}
+
+sub update {
+    my $self = shift;
+    croak "Cannot be a parent to oneself outside of bad sci-fi"
+        if $self->parent eq $self->id;
+    return $self->next::method(@_);
 }
 
 1;

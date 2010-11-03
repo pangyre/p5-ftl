@@ -19,7 +19,7 @@ jQuery(function($){
         ,type:"DELETE"
         ,error:function(xhr){
            var msg = [ xhr.statusText, xhr.responseText ].join(" · ");
-           $("<div/>").hide().html(msg).addClass("alert")
+           $("<p/>").hide().html(msg).addClass("alert")
                      .insertAfter($this)
                      .fadeIn().delay(5000)
                      .fadeOut("slow",function(){$(this).remove()});

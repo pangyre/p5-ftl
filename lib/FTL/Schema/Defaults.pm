@@ -2,6 +2,7 @@ package FTL::Schema::Defaults;
 use strict;
 use warnings;
 use parent "DBIx::Class::Core";
+use DBIx::Class::Exception;
 
 sub new {
     my $self = +shift->next::method(@_);
@@ -10,15 +11,32 @@ sub new {
 }
 
 sub insert {
-    my $self = shift;
+    my ( $self, @args ) = @_;
+
     $self->updated(\q{datetime('now')}) unless $self->updated;
-    return $self->next::method(@_);
+
+    if ( $self->result_source->has_column("parent") )
+    {
+        my $guard = $self->result_source->schema->txn_scope_guard;
+        $self->next::method(@args);
+        $self->parents; # Fatal if circular. Not efficient...
+        $guard->commit;
+    }
+    return $self;
 }
 
 sub update {
-    my $self = shift;
-    $self->updated(\q{datetime('now')}) unless $self->updated;
-    return $self->next::method(@_);
+    my ( $self, @args ) = @_;
+
+    $self->updated(\q{datetime('now')});
+    if ( $self->result_source->has_column("parent") )
+    {
+        my $guard = $self->result_source->schema->txn_scope_guard;
+        $self->next::method(@args);
+        $self->parents; # Fatal if circular. Not efficient...
+        $guard->commit;
+    }
+    $self;
 }
 
 #sub delete {
@@ -30,3 +48,27 @@ sub update {
 1;
 
 __END__
+
+
+    $self->schema->storage->
+
+last_insert_id
+
+
+  $h->last_insert_id($catalog, $schema, $table_name, $field_name [, \%attr ])
+
+        my $max = $self->result_source
+            ->resultset
+            ->search->get_column('id')->max();
+
+    my $txn = sub {
+        $self->next::method(@_);
+        DBIx::Class::Exception->throw("...");
+    };
+
+    my $rs = $self->result_source
+        ->schema
+        ->txn_do($txn);
+
+    die "RS: ", $rs;
+
