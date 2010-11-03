@@ -85,8 +85,6 @@ sub edit :Chained("load") Args(0) FormConfig {
     my $scritto = $c->stash->{scritto} ||= $c->model("DBIC::Scritto")->new({});
     my $form = $c->stash->{form};
     $form->constraints_from_dbic($c->model("DBIC::Scritto"));
-    $form->model->default_values($scritto);
-
     $form->render;
 
     if ( $form->submitted_and_valid )
@@ -94,6 +92,10 @@ sub edit :Chained("load") Args(0) FormConfig {
         $scritto->user(1);
         $form->model->update($scritto);
         $c->response->redirect( $c->uri_for_action("/s/view",[$scritto->id]) );
+    }
+    else
+    {
+        $form->model->default_values($scritto);
     }
 }
 
