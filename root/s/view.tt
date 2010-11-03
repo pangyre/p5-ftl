@@ -63,8 +63,9 @@ jQuery(function($){
 </article>
 [% END %]
 
-<aside>
+<aside id="scritto.[% scrit.id %]">
   <input type="text" placeholder="What is this?" class="type" value="[% scritto.type | html %]" />
+  <a href="#" class="delete">delete</a>
 </aside>
 
 <script type="text/javascript" charset="utf-8">//<![CDATA[

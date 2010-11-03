@@ -147,8 +147,9 @@ sub parents {
     my ( $self, @parents ) = @_;
     return @parents unless my $parent = $self->parent;
     unshift @parents, $parent;
-    croak "Circular lineage"
-        if grep { $self->id eq $_->id } @parents;
+    my %dup;
+    croak "Circular lineage ", $self->id, " --> ", join(", ", map { $_ ->id } @parents)
+        if grep { $dup{$_->id}++ } @parents;
     $parent->parents(@parents);
 }
 
