@@ -31,9 +31,9 @@ sub rest :Chained("load") Args(0) {
     my ( $self, $c ) = @_;
     given ( $c->request->method )
     {
-        when ( "GET" )    { $c->go("view") }
-        when ( "POST" )   { $c->forward("edit") }
-        when ( "PUT" )    { die "undefined behavior..."; $c->forward("edit") }
+#        when ( "GET" )    { $c->go("view") }
+#        when ( "POST" )   { $c->forward("edit") }
+#        when ( "PUT" )    { die "undefined behavior..."; $c->forward("edit") }
         when ( "DELETE" ) { $c->forward("delete") }
     }
 }
@@ -67,9 +67,15 @@ sub create :Local { # PUT
     {
         my $params = $c->req->body_params;
         delete $params->{x};
+#        $params->{scrit} = "MOO";
+#        $params->{created} = \"datetime('now')";
+#        $params->{updated} = \"datetime('now')";
+#        $params->{parent} = 10;
+#        $params->{scrit} = "MOO";
         my $scritto = $c->model("DBIC::Scritto")->new($params);
+        # use YAML; die YAML::Dump($scritto);
         $scritto->user(1);
-        $scritto->insert_or_update;
+        $scritto->insert;
         $c->response->redirect( $c->uri_for_action("/s/view",[$scritto->id]) );
         # $c->go("index"); # 321 redirect I think.
     }
@@ -84,6 +90,7 @@ sub edit :Chained("load") Args(0) FormConfig {
     my ( $self, $c ) = @_;
     my $scritto = $c->stash->{scritto} ||= $c->model("DBIC::Scritto")->new({});
     my $form = $c->stash->{form};
+    $form->model->default_values($scritto);
     $form->constraints_from_dbic($c->model("DBIC::Scritto"));
     $form->render;
 
@@ -95,7 +102,7 @@ sub edit :Chained("load") Args(0) FormConfig {
     }
     else
     {
-        $form->model->default_values($scritto);
+
     }
 }
 
