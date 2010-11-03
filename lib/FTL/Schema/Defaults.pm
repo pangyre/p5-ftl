@@ -2,7 +2,7 @@ package FTL::Schema::Defaults;
 use strict;
 use warnings;
 use parent "DBIx::Class::Core";
-use DBIx::Class::Exception;
+use Carp;
 
 sub new {
     my $self = +shift->next::method(@_);
@@ -15,8 +15,10 @@ sub insert {
 
     $self->updated(\q{datetime('now')}) unless $self->updated;
 
-    if ( $self->result_source->has_column("parent") )
+    if ( $self->result_source->has_column("parent") and $self->parent )
     {
+        $self->result_source->resultset->find($self->parent)
+            or croak "Parent ", $self->parent, " was not found";
         my $guard = $self->result_source->schema->txn_scope_guard;
         $self->next::method(@args);
         $self->parents; # Fatal if circular. Not efficient...
@@ -29,8 +31,10 @@ sub update {
     my ( $self, @args ) = @_;
 
     $self->updated(\q{datetime('now')});
-    if ( $self->result_source->has_column("parent") )
+    if ( $self->result_source->has_column("parent") and $self->parent )
     {
+        $self->result_source->resultset->find($self->parent)
+            or croak "Parent ", $self->parent, " was not found";
         my $guard = $self->result_source->schema->txn_scope_guard;
         $self->next::method(@args);
         $self->parents; # Fatal if circular. Not efficient...

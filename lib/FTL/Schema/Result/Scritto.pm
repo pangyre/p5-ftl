@@ -148,7 +148,7 @@ sub parents {
     return @parents unless my $parent = $self->parent;
     unshift @parents, $parent;
     my %dup;
-    croak "Circular lineage ", $self->id, " --> ", join(", ", map { $_ ->id } @parents)
+    croak "Circular lineage ", join(", ", map { $_ ->id } @parents)
         if grep { $dup{$_->id}++ } @parents;
     $parent->parents(@parents);
 }
@@ -162,25 +162,6 @@ sub root {
     my $self = shift;
     my @parents = $self->parents;
     return $parents[0];
-}
-
-sub insert {
-    my $self = shift;
-    $self->next::method(@_);
-    if ( $self->parent eq $self->id )
-    {
-        $self->parent(undef);
-        $self->update();
-        croak "Cannot be a parent to oneself outside of bad sci-fi";
-    }
-    $self;
-}
-
-sub update {
-    my $self = shift;
-    croak "Cannot be a parent to oneself outside of bad sci-fi"
-        if $self->parent eq $self->id;
-    return $self->next::method(@_);
 }
 
 1;
