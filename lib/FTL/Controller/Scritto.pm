@@ -68,9 +68,7 @@ sub create :Local { # PUT
         my $params = $c->req->body_params;
         delete $params->{x};
         my $scritto = $c->model("DBIC::Scritto")->new($params);
-        #$scritto->uuid(rand(1000000));
         $scritto->user(1);
-        $scritto->created("now");
         $scritto->insert_or_update;
         $c->response->redirect( $c->uri_for_action("/s/view",[$scritto->id]) );
         # $c->go("index"); # 321 redirect I think.
@@ -94,7 +92,6 @@ sub edit :Chained("load") Args(0) FormConfig {
     if ( $form->submitted_and_valid )
     {
         $scritto->user(1);
-        $scritto->created(\q{datetime('now')});
         $form->model->update($scritto);
         $c->response->redirect( $c->uri_for_action("/s/view",[$scritto->id]) );
     }

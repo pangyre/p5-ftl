@@ -17,8 +17,9 @@ sub insert {
 
     if ( $self->result_source->has_column("parent") and $self->parent )
     {
-        $self->result_source->resultset->find($self->parent)
-            or croak "Parent ", $self->parent, " was not found";
+        $self->parent->in_storage
+            or $self->result_source->resultset->find($self->parent)
+            or croak "Parent ", $self->parent->id, " was not found";
         my $guard = $self->result_source->schema->txn_scope_guard;
         $self->next::method(@args);
         $self->parents; # Fatal if circular. Not efficient...
@@ -33,8 +34,9 @@ sub update {
     $self->updated(\q{datetime('now')});
     if ( $self->result_source->has_column("parent") and $self->parent )
     {
-        $self->result_source->resultset->find($self->parent)
-            or croak "Parent ", $self->parent, " was not found";
+        $self->parent->in_storage
+            or $self->result_source->resultset->find($self->parent)
+            or croak "Parent ", $self->parent->id, " was not found";
         my $guard = $self->result_source->schema->txn_scope_guard;
         $self->next::method(@args);
         $self->parents; # Fatal if circular. Not efficient...
