@@ -21,7 +21,7 @@ sub rest :Chained("load") Args(0) {
     {
         when ( "GET" )    { $c->go("view") }
         when ( "POST" )   { $c->forward("edit") }
-        when ( "PUT" )    { $c->forward("create") }
+        when ( "PUT" )    { $c->forward("edit") }
         when ( "DELETE" ) { $c->forward("delete") }
     }
 }
@@ -33,10 +33,10 @@ sub view :Private {
 sub delete :Private {
     my ( $self, $c ) = @_;
     my $type = $c->stash->{type};
-    if ( $type->scritti )
+    if ( $type->scritti_rs->count )
     {
         $c->res->status(406);
-        $c->res->body("WTF? That type has things and junk.");
+        $c->res->body('Type "' . $type->name . '" has associated scritti');
         $c->detach;
     }
     $type->delete;

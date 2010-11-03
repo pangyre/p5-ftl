@@ -17,7 +17,6 @@
 img {
  border:none;
 }
-
 html,body {
  margin: 0 auto;
  width: 100%;
@@ -157,7 +156,10 @@ footer {
  -webkit-box-shadow:1px 1px 1px rgba(0,0,33,0.83);
  -moz-box-shadow:1px 1px 1px rgba(0,0,33,0.83);
 }
-
+.alert {
+    color:#900;
+    font-family:"helvetica neue", helvetica, sans-serif;
+}
 textarea {
  width:100%;
 }
