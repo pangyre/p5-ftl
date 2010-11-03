@@ -2,6 +2,7 @@ package FTL::Controller::Scritto;
 use Moose;
 use namespace::autoclean;
 use Encode;
+use feature ":5.10";
 
 BEGIN { extends "Catalyst::Controller::HTML::FormFu" }
 
@@ -23,6 +24,31 @@ sub load :Chained("/") PathPart("s") CaptureArgs(1) {
     my ( $self, $c, $id ) = @_;
     $id ||= $c->request->arguments->[0]; # for forwards
     $c->stash->{scritto} ||= $c->model("DBIC::Scritto")->find($id);
+}
+
+
+sub rest :Chained("load") Args(0) {
+    my ( $self, $c ) = @_;
+    given ( $c->request->method )
+    {
+        when ( "GET" )    { $c->go("view") }
+        when ( "POST" )   { $c->forward("edit") }
+        when ( "PUT" )    { die "undefined behavior..."; $c->forward("edit") }
+        when ( "DELETE" ) { $c->forward("delete") }
+    }
+}
+
+sub delete :Private {
+    my ( $self, $c ) = @_;
+    my $scritto = $c->stash->{scritto};
+    if ( $scritto->children_rs->count )
+    {
+        $c->res->status(406);
+        $c->res->body('Scritto id(' . $scritto->id . ') has associated scritti');
+        $c->detach;
+    }
+    $scritto->delete;
+    $c->response->status(204);
 }
 
 sub view :PathPart("") Chained("load") Args(0) {

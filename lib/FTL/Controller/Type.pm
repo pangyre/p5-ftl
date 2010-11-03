@@ -21,7 +21,7 @@ sub rest :Chained("load") Args(0) {
     {
         when ( "GET" )    { $c->go("view") }
         when ( "POST" )   { $c->forward("edit") }
-        when ( "PUT" )    { $c->forward("edit") }
+        when ( "PUT" )    { die "undefined behavior..."; $c->forward("edit") }
         when ( "DELETE" ) { $c->forward("delete") }
     }
 }

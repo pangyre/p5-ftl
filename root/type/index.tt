@@ -8,7 +8,6 @@
 [% END %]
 </ol>
 
-
 <script type="text/javascript">//<![CDATA[
 jQuery(function($){
   $("a.delete").click(function(){
