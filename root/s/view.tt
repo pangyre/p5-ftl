@@ -33,11 +33,22 @@ jQuery(function($){
     })
      .data("autocomplete")._renderItem = renderItem;
   });
+
+  $("aside").hover(function(){
+     $(this).closest("article").find(">div")
+         .addClass("highlight")
+         .effect("pulsate",{times:1});
+   },
+   function(){
+     $(this).closest("article").find(">div")
+         .removeClass("highlight");
+   });
+
 });
 //]]> </script>
 
 <script type="text/javascript" charset="utf-8">//<![CDATA[
-  $("input.type").change(function(){
+$("input.type").change(function(){
    var name = $(this).val();
    var article = $(this).parents("article:first");
    var sid = $(this).attr("name").split(".")[1];
@@ -48,7 +59,7 @@ jQuery(function($){
       ,success: function(){ $(article).attr({class:false}).addClass("type" + name.substr(0,1).toUpperCase() + name.substr(1,this.length)) }
       ,error: function(){ alert("OH NOES") }
     });
-  });
+});
 //]]> </script>
 
 [% RETURN %]
@@ -65,7 +76,6 @@ jQuery(function($){
 
 <aside id="scritto.[% scrit.id %]">
   <input type="text" placeholder="What is this?" class="type" value="[% scritto.type | html %]" />
-  <a href="#" class="delete">delete</a>
 </aside>
 
 <script type="text/javascript" charset="utf-8">//<![CDATA[

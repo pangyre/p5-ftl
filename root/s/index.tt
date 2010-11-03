@@ -1,30 +1,8 @@
+<ol>
 [% FOR scrit IN scritti.all %]
   <li id="scritto.[% scrit.id %]">
    [% s_link(scrit) %] [% s_edit_link(scrit,"edit") %]
-<a href="#" class="delete">delete</a>
+<a href="#" class="delete s.[% scrit.id %].id">delete</a>
   </li>
 [% END %]
-
-<script type="text/javascript">//<![CDATA[
-jQuery(function($){
-  $("a.delete").click(function(){
-     var $this = $(this);
-     var id = $(this).parents("li:first").attr("id").split(".")[1];
-     $.ajax({
-        url:"[% c.uri_for("/s") %]/" + id + "/rest"
-        ,type:"DELETE"
-        ,error:function(xhr){
-           var msg = [ xhr.statusText, xhr.responseText ].join(" · ");
-           $("<p/>").hide().html(msg).addClass("alert")
-                     .insertAfter($this)
-                     .fadeIn().delay(5000)
-                     .fadeOut("slow",function(){$(this).remove()});
-        }
-        ,success:function(){
-           $this.parents("li:first").fadeOut(function(){$(this).remove()})
-        }
-     });
-     return false;
-  });
-});
-//]]> </script>
+</ol>

@@ -20,6 +20,10 @@ easily graphed.
 Plot points
 [% END %]
 
+[% RETURN %]
+
+This is fun but not ready and not relevant.
+
 <script type="text/javascript" src="[% c.uri_for("/3rd/protovis/protovis-r3.2.js") %]"> </script>
 <script ="text/javascript">
 var miserables = {
