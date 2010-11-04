@@ -16,6 +16,14 @@ sub populate : Local Args(0) {
 
 }
 
+sub backup : Local Args(0) {
+    my ( $self, $c ) = @_;
+    my $backup = $c->path_to("db.backup.sqlt");
+    $c->model("DBIC")->storage->dbh->sqlite_backup_to_file($backup);
+    $c->res->body("OK");
+#    $dbh->sqlite_backup_to_file( $filename )
+}
+
 use DBIx::Class::Fixtures;
 
 sub dump_fixtures : Local Args(0) {
