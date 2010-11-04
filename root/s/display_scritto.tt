@@ -1,5 +1,5 @@
 [% DEFAULT root = scritto %]
-<article id="s.[% scritto.id %]" class="s.[% scritto.id %] type[% ( scritto.type || "none" ) | ucfirst %]">
+<article id="s.[% scritto.id %]" class="s.[% scritto.id %].id type[% ( scritto.type || "none" ) | ucfirst %]">
 <aside id="aside.[% scrit.id %]">
 <input style="border:none;display:inline;background:inherit!important;border-left:1px dotted gray; padding-left:1ex"
 type="text" name="scritto.[% scritto.id %].type" placeholder="What is this?" class="type" value="[% scritto.type | html %]" />
