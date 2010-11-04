@@ -249,7 +249,7 @@ jQuery(function($){
      var ident = $this.attr("class").match(/\b(\w+?)\.(\d+)\.id\b/);
      var path_part = ident[ident.length-2];
      var id = ident[ident.length-1];
-     var $domTarget = $("."+path_part+"."+id);//.filter(".container");
+     var $domTarget = $("."+path_part+"\\."+id+"\\.id");//.filter(".container");
      $.ajax({
         url:"[% c.uri_for("/") %]" + [ path_part, id, "rest" ].join("/")
         ,type:"DELETE"
