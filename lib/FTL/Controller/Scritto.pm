@@ -32,7 +32,7 @@ sub rest :Chained("load") Args(0) {
     given ( $c->request->method )
     {
 #        when ( "GET" )    { $c->go("view") }
-#        when ( "POST" )   { $c->forward("edit") }
+        when ( "POST" )   { $c->forward("ajax_edit") }
 #        when ( "PUT" )    { die "undefined behavior..."; $c->forward("edit") }
         when ( "DELETE" ) { $c->forward("delete") }
     }

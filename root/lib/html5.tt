@@ -267,6 +267,34 @@ jQuery(function($){
      });
      return false;
   });
+
+  $(".editable").each(function(){
+     var $this = $(this);
+     var ident = $this.attr("class").match(/\b(\w+?)\.(\d+)\.id\b/);
+     if ( ! ident ) return;
+     var path_part = ident[ident.length-2];
+     var id = ident[ident.length-1];
+     var uri = "[% c.uri_for("/") %]" + [ path_part, id, "rest" ].join("/");
+     $(this).editable(uri,{
+        indicator  : "<img src='[% c.uri_for("/3rd/img/indicator.gif") %]'>"
+        ,type: "POST"
+//        ,dataType: "json"
+//                ,data: {value:value}
+        ,type      : "autogrow"
+        ,submit    : "Update"
+        ,cancel    : "Cancel"
+        ,tooltip   : "Click to edit"
+        ,onblur    : "ignore"
+        ,event     : "dblclick"
+        ,autogrow  : {
+           lineHeight : 16,
+           minHeight  : 32
+        }
+     });
+  });
+
+  $("body").effect("pulsate",{times:1});
+
 });
 //]]> </script>
  </body>

@@ -1,5 +1,5 @@
 [% DEFAULT root = scritto %]
-<article id="s.[% scritto.id %]" class="s.[% scritto.id %] autogrow type[% ( scritto.type || "none" ) | ucfirst %]">
+<article id="s.[% scritto.id %]" class="s.[% scritto.id %] type[% ( scritto.type || "none" ) | ucfirst %]">
 <aside id="aside.[% scrit.id %]">
 <input style="border:none;display:inline;background:inherit!important;border-left:1px dotted gray; padding-left:1ex"
 type="text" name="scritto.[% scritto.id %].type" placeholder="What is this?" class="type" value="[% scritto.type | html %]" />
@@ -8,15 +8,16 @@ type="text" name="scritto.[% scritto.id %].type" placeholder="What is this?" cla
   <a href="#" class="delete s.[% scritto.id %].id">delete</a>
 
 </aside>
-<div class="scrit" id="scritto.[% scritto.id %]">[% scritto.scrit %]</div>
+<div class="scrit editable s.[% scritto.id %].id" id="scritto.[% scritto.id %]">[% scritto.scrit %]</div>
 [% FOR kid IN scritto.children %]
   [% INCLUDE s/display_scritto.tt scritto = kid %]
 [% END %]
 </article>
 
+[% RETURN %]
 <script type="text/javascript" charset="utf-8">//<![CDATA[
 $(document).ready(function() {
-    $("#scritto_[% scritto.id %] div").editable("[% c.uri_for_action("/s/ajax_edit", [scritto.id]) %]", { 
+    $("#scritto.[% scritto.id %] div").editable("[% c.uri_for_action("/s/ajax_edit", [scritto.id]) %]", { 
         indicator  : "<img src='[% c.uri_for("/3rd/img/indicator.gif") %]'>"
 //         type: "POST"
 //        ,dataType: "json"
@@ -32,8 +33,6 @@ $(document).ready(function() {
            minHeight  : 32
         }
     });
-
-
 
 });
 //]]></script>
