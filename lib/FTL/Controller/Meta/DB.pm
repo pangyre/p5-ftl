@@ -16,8 +16,19 @@ sub populate : Local Args(0) {
 
 }
 
-sub dump : Local Args(0) {
+use DBIx::Class::Fixtures;
 
+sub dump_fixtures : Local Args(0) {
+    my ( $self, $c ) = @_;
+    my $fixtures = DBIx::Class::Fixtures->new({
+        config_dir => $c->path_to("/etc/config"),
+
+                                              });        
+    $fixtures->dump({
+        all => 1, # just dump everything that's in the schema
+        schema => $c->model("DBIC")->schema,
+        directory => $c->path_to("/etc/fixture"), # output directory
+                    });
 }
 
 sub schema : Local Args(0) {
@@ -79,3 +90,10 @@ FTL::Controller::Root - Root Controller for FTL
 The root page (/)
 
 =cut
+
+    $fixtures->populate({
+   directory => '/home/me/app/fixtures',
+   ddl => '/home/me/app/sql/ddl.sql',
+   connection_details => ['dbi:mysql:dbname=app_dev', 'me', 'password'],
+   post_ddl => '/home/me/app/sql/post_ddl.sql',
+                        });
