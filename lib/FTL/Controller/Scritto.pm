@@ -40,7 +40,9 @@ sub rest :Chained("load") Args(0) {
 
 sub delete :Private {
     my ( $self, $c ) = @_;
-    my $scritto = $c->stash->{scritto};
+    my $scritto = $c->stash->{scritto}
+        or die 404;
+
     if ( $scritto->children_rs->count )
     {
         $c->res->status(406);

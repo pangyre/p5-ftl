@@ -48,6 +48,10 @@ sub update {
         $self->parents; # Fatal if circular. Not efficient...
         $guard->commit;
     }
+    else
+    {
+        $self->next::method(@args);
+    }
     $self;
 }
 

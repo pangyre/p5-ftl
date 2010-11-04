@@ -1,6 +1,6 @@
 <ol>
 [% FOR scrit IN scritti.all %]
-  <li id="scritto.[% scrit.id %]">
+  <li id="scritto.[% scrit.id %]" class="s.[% scrit.id %]">
    [% s_link(scrit) %] [% s_edit_link(scrit,"edit") %]
 <a href="#" class="delete s.[% scrit.id %].id">delete</a>
   </li>
