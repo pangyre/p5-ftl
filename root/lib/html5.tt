@@ -194,6 +194,13 @@ textarea {
 .highlight {
  background-color:#ffa;
 }
+input.type {
+ border:none;
+ display:inline;
+ background:inherit!important;
+ border-left:1px dotted gray;
+ padding-left:1ex
+}
 </style>
 <script type="text/javascript">//<![CDATA[
 jQuery(function($) {
@@ -263,6 +270,31 @@ jQuery(function($){
         }
         ,success:function(){
            $domTarget.fadeOut(function(){$(this).remove()})
+        }
+     });
+     return false;
+  });
+
+  $("a.newChild").click(function(){
+     var $this = $(this);
+     var ident = $this.attr("class").match(/\b(\w+?)\.(\d+)\.id\b/);
+     var path_part = ident[ident.length-2];
+     var id = ident[ident.length-1];
+     var $domTarget = $("."+path_part+"\\."+id+"\\.id");//.filter(".container");
+     $.ajax({
+        url:"[% c.uri_for("/s/create") %]"
+        ,type:"POST"
+        ,data:{scrit:"[...]",parent:id}
+        ,error:function(xhr){
+           var msg = [ xhr.statusText, xhr.responseText ].join(" · ");
+           $("<div/>").hide().html(msg).addClass("alert")
+                      .css({margin:"1ex"})
+                      .insertAfter($this)
+                      .fadeIn().delay(9000)
+                      .fadeOut("slow",function(){$(this).remove()});
+        }
+        ,success:function(){
+            window.location.reload(true);
         }
      });
      return false;
