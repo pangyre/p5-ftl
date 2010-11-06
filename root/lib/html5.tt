@@ -301,12 +301,24 @@ jQuery(function($){
      return false;
   });
 
+/*
   $("article").draggable({
       revert:true
-//      ,helper:"clone"
       ,containment:"parent"
       ,axis:"y"
   });
+*/
+
+$("article.root").sortable({
+  update:function(evt,ui){
+      var order = ui.item.prevAll("article").length + 1;
+      alert(order);
+  }   
+  ,items: "article"
+  ,cursor:"move"
+});
+
+
 
   $(".editable").each(function(){
      var $this = $(this);

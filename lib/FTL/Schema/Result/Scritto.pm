@@ -178,6 +178,11 @@ sub root {
     return $parents[0];
 }
 
+sub is_root {
+    my $self = shift;
+    ! $self->parent and $self->children_rs->count;
+}
+
 1;
 
 __END__
