@@ -49,7 +49,9 @@ sub delete :Private {
         $c->res->body('Scritto id(' . $scritto->id . ') has associated scritti');
         $c->detach;
     }
-    $scritto->delete;
+    # $scritto->delete; # flag for permanent delete?
+    $scritto->status("deleted");
+    $scritto->update;
     $c->response->status(204);
 }
 

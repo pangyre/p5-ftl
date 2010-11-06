@@ -1,0 +1,4 @@
+<ul>
+  <li><a href="[% c.uri_for_action("/meta/db/schema") %]">db/schema</a></li>
+  <li><a href="[% c.uri_for_action("/meta/db/backup") %]">db/backup</a></li>
+</ul>

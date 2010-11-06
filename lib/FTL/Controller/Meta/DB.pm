@@ -20,8 +20,9 @@ sub backup : Local Args(0) {
     my ( $self, $c ) = @_;
     my $backup = $c->path_to("db.backup.sqlt");
     $c->model("DBIC")->storage->dbh->sqlite_backup_to_file($backup);
-    $c->res->body("OK");
-#    $dbh->sqlite_backup_to_file( $filename )
+    $c->stash(content => "OK: " . $backup,
+              title => "Database backup created",
+              template => "index.tt");
 }
 
 use DBIx::Class::Fixtures;
@@ -82,26 +83,3 @@ __PACKAGE__->meta->make_immutable;
 1;
 
 __END__
-
-=head1 NAME
-
-FTL::Controller::Root - Root Controller for FTL
-
-=head1 DESCRIPTION
-
-[enter your description here]
-
-=head1 METHODS
-
-=head2 index
-
-The root page (/)
-
-=cut
-
-    $fixtures->populate({
-   directory => '/home/me/app/fixtures',
-   ddl => '/home/me/app/sql/ddl.sql',
-   connection_details => ['dbi:mysql:dbname=app_dev', 'me', 'password'],
-   post_ddl => '/home/me/app/sql/post_ddl.sql',
-                        });

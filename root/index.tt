@@ -1,3 +1,6 @@
+[% IF title %]<h1>[% title | html %]</h1>[% END %]
+[% content %]
+
 <h2>
  O HAI, [% c.config.name %]!
 </h2>
