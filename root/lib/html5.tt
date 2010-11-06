@@ -299,6 +299,12 @@ jQuery(function($){
      return false;
   });
 
+  $("article").draggable({
+      revert:true
+//      ,helper:"clone"
+      ,axis:"y"
+  });
+
   $(".editable").each(function(){
      var $this = $(this);
      var ident = $this.attr("class").match(/\b(\w+?)\.(\d+)\.id\b/);
