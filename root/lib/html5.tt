@@ -309,11 +309,33 @@ jQuery(function($){
   });
 */
 
+// Add the /uri etc.
+var ajaxErr = function(xhr){
+  var msg = [ xhr.statusText, xhr.responseText ].join(" · ");
+  $("<div/>").hide().html(msg).addClass("alert")
+             .css({margin:"1ex"})
+             .prependTo("body")
+             .fadeIn().delay(9000)//do length/size based time
+             .fadeOut("slow",function(){$(this).remove()});
+};
+
 $("article.root").sortable({
   update:function(evt,ui){
-      var order = ui.item.prevAll("article").length + 1;
-      alert(order);
+     var position = ui.item.prevAll("article").length + 1;
+     var id = ui.item.context.id.split(".")[1];
+     $.ajax({
+        url:["[% c.uri_for("/s") %]",id,"position"].join("/")
+        ,data:{position:position}
+        ,type:"POST"
+        ,error:function(xhr){ajaxErr(xhr)}
+        ,success:function(){
+
+        }
+
+     });
   }   
+  ,containment:"parent"
+  ,axis:"y"
   ,items: "article"
   ,cursor:"move"
 });

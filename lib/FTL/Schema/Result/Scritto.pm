@@ -16,7 +16,7 @@ __PACKAGE__->table("scritto");
 __PACKAGE__->position_column("position");
 __PACKAGE__->grouping_column("parent");
 
-__PACKAGE__->resultset_attributes({ order_by => "me.created",
+__PACKAGE__->resultset_attributes({ order_by => [ "position", "me.created" ],
                                     where => { status => { "!=" => "deleted" } }
                                   });
 

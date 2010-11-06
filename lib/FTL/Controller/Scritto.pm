@@ -110,6 +110,20 @@ sub edit :Chained("load") Args(0) FormConfig {
     }
 }
 
+sub position :Chained("load") Args(0) {
+    my ( $self, $c ) = @_;
+    my $scritto = $c->stash->{scritto} || die 404;
+    my $position = delete $c->request->params->{position};
+    die 406, "bad argument list, only send position"
+        if %{ $c->request->params };
+    $c->response->status(204);
+#    unless ( $scritto->position == $position )
+#    {
+        $scritto->move_to($position);
+        $scritto->update;
+#    }
+}
+
 sub ajax_edit :Chained("load") Args(0) {
     my ( $self, $c ) = @_;
     my $scritto = $c->stash->{scritto} or die "No scritto...";# ||= $c->model("DBIC::Scritto")->new({});
