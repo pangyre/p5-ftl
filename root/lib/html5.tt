@@ -12,6 +12,7 @@
 <script type="text/javascript" src="[% c.uri_for("/3rd/jquery/jquery.min.js") %]"></script>
 <script type="text/javascript" src="[% c.uri_for("/3rd/jquery/jquery-ui.min.js") %]"></script>
 [%-END %]
+<script type="text/javascript" src="[% c.uri_for("/3rd/jquery/jquery.expander.js") %]"></script>
 <link href="[% c.uri_for("/3rd/jquery/css/overcast/jquery-ui.css") %]" rel="stylesheet" type="text/css">
 <style type="text/css">
 img {
@@ -318,6 +319,11 @@ var ajaxErr = function(xhr){
              .fadeIn().delay(9000)//do length/size based time
              .fadeOut("slow",function(){$(this).remove()});
 };
+
+  $("article > div").expander({
+     userCollapseText:"[less]"
+     ,expandText:"[more]"
+  });
 
 $("article.root").sortable({
   update:function(evt,ui){
