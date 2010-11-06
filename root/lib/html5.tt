@@ -334,7 +334,7 @@ $("article.root").sortable({
 
      });
   }   
-  ,containment:"parent"
+//  ,containment:"parent"
   ,axis:"y"
   ,items: "article"
   ,cursor:"move"
