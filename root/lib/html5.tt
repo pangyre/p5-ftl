@@ -216,14 +216,12 @@ jQuery(function($) {
  <nav>
 <ul>
  <li><a href="[% c.uri_for("/s") %]">/s</a></li>
- <li><a href="[% c.uri_for("/meta/db") %]">db schema</a></li>
- <li>[% PROCESS search/basic_form.tt %]</li>
  <li><a href="[% c.uri_for("/todo.txt") %]">todo</a></li>
  <li><a href="[% c.uri_for("/type") %]">type</a></li>
  <li><a href="[% c.uri_for("/s/create") %]">create</a></li>
  <li><a href="[% c.uri_for("/meta") %]">meta</a></li>
+ <li>[% PROCESS search/basic_form.tt %]</li>
 </ul>
-
  </nav>
 
 <div id="content">
@@ -252,7 +250,7 @@ the <a itemprop="license"
    which will be used to find corresponding id = TABLE.# in the page.
 */
 jQuery(function($){
-  $("a.delete").click(function(){
+  $("a.delete").one("click",function(){
      var $this = $(this);
      var ident = $this.attr("class").match(/\b(\w+?)\.(\d+)\.id\b/);
      var path_part = ident[ident.length-2];

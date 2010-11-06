@@ -31,10 +31,10 @@ sub rest :Chained("load") Args(0) {
     my ( $self, $c ) = @_;
     given ( $c->request->method )
     {
-#        when ( "GET" )    { $c->go("view") }
-        when ( "POST" )   { $c->forward("ajax_edit") }
+        when ( "GET" )    { $c->go("view") }
+        when ( "POST" )   { $c->go("ajax_edit") }
 #        when ( "PUT" )    { die "undefined behavior..."; $c->forward("edit") }
-        when ( "DELETE" ) { $c->forward("delete") }
+        when ( "DELETE" ) { $c->go("delete") }
     }
 }
 

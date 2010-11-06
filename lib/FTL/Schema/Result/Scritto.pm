@@ -9,9 +9,12 @@ use overload q{""} => sub {
 }, fallback => 1;
 
 __PACKAGE__->load_components("InflateColumn::DateTime",
+                             "Ordered",
                              "+FTL::Schema::Defaults");
 
 __PACKAGE__->table("scritto");
+__PACKAGE__->position_column("position");
+__PACKAGE__->grouping_column("parent");
 
 __PACKAGE__->resultset_attributes({ order_by => "me.created",
                                     where => { status => { "!=" => "deleted" } }
@@ -46,6 +49,15 @@ __PACKAGE__->add_columns(
     is_foreign_key => 1,
     is_nullable => 1,
     size => 10,
+  },
+  "position",
+  {
+    data_type => "INT",
+    default_value => 1,
+    extra => { unsigned => 1 },
+    is_foreign_key => 0,
+    is_nullable => 1,
+    size => 6,
   },
   "scrit",
   {
@@ -169,3 +181,5 @@ sub root {
 1;
 
 __END__
+
+    alter table scritto add column position INT;
