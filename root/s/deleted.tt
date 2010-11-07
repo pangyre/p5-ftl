@@ -1,0 +1,6 @@
+<h1>Deleted scritti</h1>
+
+<p class="alert">Deletes on this page are permanent.</p>
+
+[% INCLUDE s/index.tt %]
+

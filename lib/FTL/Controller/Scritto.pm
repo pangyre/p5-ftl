@@ -20,6 +20,13 @@ sub index :Path Args(0) {
                );
 }
 
+sub deleted :Local Args(0) {
+    my ( $self, $c ) = @_;
+    $c->stash(
+        scritti => $c->model("DBIC::Scritto")->deleted_rs
+               );
+}
+
 sub load :Chained("/") PathPart("s") CaptureArgs(1) {
     my ( $self, $c, $id ) = @_;
     $id ||= $c->request->arguments->[0]; # for forwards
@@ -49,9 +56,16 @@ sub delete :Private {
         $c->res->body('Scritto id(' . $scritto->id . ') has associated scritti');
         $c->detach;
     }
-    # $scritto->delete; # flag for permanent delete?
-    $scritto->status("deleted");
-    $scritto->update;
+    
+    if ( $scritto->status eq "deleted" ) # It's "deleted" already. Make it real.
+    {
+            $scritto->delete;
+    }
+    else
+    {
+        $scritto->status("deleted");
+        $scritto->update;
+    }
     $c->response->status(204);
 }
 

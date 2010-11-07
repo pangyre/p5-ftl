@@ -12,6 +12,14 @@ sub root_rs {
     scalar +shift->root;
 }
 
+sub deleted {
+    +shift->search({status => "deleted"},{where => undef});
+}
+
+sub deleted_rs {
+    scalar +shift->deleted;
+}
+
 1;
 
 __END__
