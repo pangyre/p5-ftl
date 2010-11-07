@@ -320,10 +320,12 @@ var ajaxErr = function(xhr){
              .fadeOut("slow",function(){$(this).remove()});
 };
 
-  $("article > div").expander({
-     userCollapseText:"[less]"
-     ,expandText:"[more]"
-  });
+  if ( $("article article").size() > 1 ) {
+     $("article > div").expander({
+        userCollapseText:"[less]"
+        ,expandText:"[more]"
+     });
+  }
 
 $("article.root").sortable({
   update:function(evt,ui){
