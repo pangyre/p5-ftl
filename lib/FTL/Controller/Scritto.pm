@@ -71,15 +71,10 @@ sub create :Local { # PUT
     {
         my $params = $c->req->body_params;
         delete $params->{x};
-#        $params->{scrit} = "MOO";
-#        $params->{created} = \"datetime('now')";
-#        $params->{updated} = \"datetime('now')";
-#        $params->{parent} = 10;
-#        $params->{scrit} = "MOO";
-        my $scritto = $c->model("DBIC::Scritto")->new($params);
-        # use YAML; die YAML::Dump($scritto);
+        $params->{scrit} ||= $self->{placeholder};
+        my $scritto = $c->model("DBIC::Scritto")->find_or_create($params);
         $scritto->user(1);
-        $scritto->insert;
+        $scritto->insert_or_update;
         $c->response->redirect( $c->uri_for_action("/s/view",[$scritto->id]) );
         # $c->go("index"); # 321 redirect I think.
     }

@@ -4,7 +4,14 @@ default_view: "TT"
 default_model: "DBIC"
 use_google_js: 1
 
-# MODELS -------------------------------------------------
+# CONTROLLERS -----------------------------------------------
+
+Controller::Scritto:
+  placeholder: "[…]"
+
+
+# MODELS ----------------------------------------------------
+
 Model::DBIC:
   connect_info:
     - dbi:SQLite:__path_to(dummy.sqlt)__

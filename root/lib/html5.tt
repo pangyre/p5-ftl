@@ -294,7 +294,7 @@ jQuery(function($){
      $.ajax({
         url:"[% c.uri_for("/s/create") %]"
         ,type:"POST"
-        ,data:{scrit:"[...]",parent:id}
+        ,data:{parent:id}
         ,error:function(xhr){
            var msg = [ xhr.statusText, xhr.responseText ].join(" · ");
            $("<div/>").hide().html(msg).addClass("alert")
