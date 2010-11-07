@@ -3,10 +3,10 @@ package FTL::Schema::Result::Tag;
 use strict;
 use warnings;
 
-use parent 'DBIx::Class::Core';
+use parent "DBIx::Class::Core";
 
 __PACKAGE__->load_components(
-#  "FTL::Default",
+  "+FTL::Schema::Defaults",
 #  "InflateColumn::DateTime",
 #  "Core",
 );
@@ -21,8 +21,8 @@ __PACKAGE__->add_columns(
     is_nullable => 0,
     size => 10,
   },
-  "uuid",
-  { data_type => "CHAR", default_value => undef, is_nullable => 0, size => 36 },
+#  "uuid",
+#  { data_type => "CHAR", default_value => undef, is_nullable => 0, size => 36 },
   "name",
   {
     data_type => "VARCHAR",
@@ -59,4 +59,8 @@ __PACKAGE__->has_many(
   { "foreign.tag" => "self.id" },
 );
 
+
 1;
+
+
+__END__

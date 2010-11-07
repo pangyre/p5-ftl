@@ -15,6 +15,8 @@ __PACKAGE__->load_components("InflateColumn::DateTime",
 __PACKAGE__->table("scritto");
 __PACKAGE__->position_column("position");
 __PACKAGE__->grouping_column("parent");
+__PACKAGE__->_initial_position_value(1);
+__PACKAGE__->null_position_value(undef);
 
 __PACKAGE__->resultset_attributes({ order_by => [ "position", "me.created" ],
                                     where => { status => { "!=" => "deleted" } }

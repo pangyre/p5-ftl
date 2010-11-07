@@ -49,7 +49,7 @@ nav {
  float: left;
  width: 100%;
  background: #334;
- font-family:"gill sans";
+ font-family:"gill sans",sans-serif;
  font-weight:normal;
 }
 
@@ -204,6 +204,14 @@ input.type {
  border-left:1px dotted gray;
  padding-left:1ex
 }
+table {
+ border:0;
+ font-family:"gill sans",sans-serif;
+}
+td,th {
+ padding:0 3px;
+ margin:2px;
+}
 </style>
 <script type="text/javascript">//<![CDATA[
 jQuery(function($) {
@@ -322,8 +330,8 @@ var ajaxErr = function(xhr){
 
   if ( $("article article").size() > 1 ) {
      $("article > div").expander({
-        userCollapseText:"[less]"
-        ,expandText:"[more]"
+        userCollapseText:"<sub>[less]</sub>"
+        ,expandText:"<sub>[more]</sub>"
      });
   }
 

@@ -1,0 +1,15 @@
+{
+   "sets":[
+     {
+        "class":"Scritto"
+        ,"quantity":"all"
+        ,"cond":{ "me.scrit":{"LIKE":"%FTL %"} }
+        ,"fetch": [
+            { 
+              "rel":"children"
+              ,"cascade":1
+            }
+       ]
+     }
+   ]
+}
