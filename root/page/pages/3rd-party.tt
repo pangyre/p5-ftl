@@ -1,1 +1,17 @@
 <h1>Third party libraries in [% c.name %]</h1>
+
+<h2>jQuery + jQuery UI</h2>
+
+<ul>
+  <li><a href="http://jquery.com/">jQuery</a>.</li>
+  <li><a href="http://jqueryui.com/">jQuery UI</a>.</li>
+  <li><a href="http://jquery.org/license">License</a>.</li>
+</ul>
+
+<h2>jQuery expander</h2>
+
+<ul>
+  <li><a href="http://plugins.learningjquery.com/expander">jQuery Expander</a>.</li>
+  <li><a href="http://jquery.org/license">License</a>.</li>
+</ul>
+
