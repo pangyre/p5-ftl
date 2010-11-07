@@ -252,7 +252,12 @@ jQuery(function($) {
 FTL is free open source software released under
 the <a itemprop="license"
        href="http://www.perlfoundation.org/artistic_license_2_0">Artistic
-    License 2.0</a> &middot; <a href="[% c.repository %]">FTL on Github</a>
+    License 2.0</a> &middot; <a href="[% c.repository %]">FTL on
+      Github</a>
+<br />
+<a href="[% c.uri_for("/page") %]/3rd-party">Third party</a>
+ &middot;
+<a href="[% c.uri_for("/") %]">Home</a>
   </small>
  </footer>
 
