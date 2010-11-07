@@ -25,9 +25,8 @@ html,body {
  background-color:#d3d4d9;
  color:#001;
  font-family:"helvetica neue", helvetica, sans-serif;
- font-size:.8em;
  font-family:"chaparral pro","droid serif",serif;
- font-size:.9em;
+ font-size:.925em;
  line-height:1.125em; /* 16 font-size:0.75em; */
 }
 
@@ -186,11 +185,9 @@ textarea {
 }
 .typeStanza > div {
  white-space:pre-wrap;
- font-size:12px;
  line-height:125%;
 }
 .typeProse > div {
- font-size:13px;
  line-height:125%;
  white-space:pre-wrap;
 }
@@ -388,7 +385,7 @@ $("article.root").sortable({
      });
   });
 
-  $("body").effect("pulsate",{times:1});
+//  $("body").effect("pulsate",{times:1});
 
 });
 //]]> </script>

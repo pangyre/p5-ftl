@@ -1,18 +1,25 @@
-<h1>Third party libraries in [% c.name %]</h1>
+<h1>Third party libraries used in [% c.name %]</h1>
+
+<h2>Perl libraries</h2>
+
+<p>
+There are many and they are moving around so the tally will
+probably have to wait.
+</p>
 
 <h2>jQuery + jQuery UI</h2>
 
 <ul>
   <li><a href="http://jquery.com/">jQuery</a>.</li>
   <li><a href="http://jqueryui.com/">jQuery UI</a>.</li>
-  <li><a href="http://jquery.org/license">License</a>.</li>
+  <li><a href="http://jquery.org/license">MIT license</a>.</li>
 </ul>
 
 <h2>jQuery expander</h2>
 
 <ul>
   <li><a href="http://plugins.learningjquery.com/expander">jQuery Expander</a>.</li>
-  <li><a href="http://jquery.org/license">License</a>.</li>
+  <li><a href="http://jquery.org/license">MIT license</a>.</li>
 </ul>
 
 
@@ -20,7 +27,7 @@
 
 <ul>
   <li><a href="http://www.appelsiini.net/projects/jeditable">jQuery Autogrow</a>.</li>
-  <li><a href="http://www.opensource.org/licenses/mit-license.php">License</a>.</li>
+  <li><a href="http://www.opensource.org/licenses/mit-license.php">MIT license</a>.</li>
 </ul>
 
 
@@ -28,5 +35,5 @@
 
 <ul>
   <li><a href="http://www.appelsiini.net/projects/jeditable">jQuery Jeditable</a>.</li>
-  <li><a href="http://www.opensource.org/licenses/mit-license.php">License</a>.</li>
+  <li><a href="http://www.opensource.org/licenses/mit-license.php">MIT license</a>.</li>
 </ul>
