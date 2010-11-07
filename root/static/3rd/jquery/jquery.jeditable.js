@@ -12,6 +12,7 @@
  * Based on editable by Dylan Verheul <dylan_at_dyve.net>:
  *    http://www.dyve.net/jquery/?editable
  *
+ * APV: Unsanctioned minor edits to support arbitrary JSON stuff.
  */
 
 /**
@@ -340,11 +341,14 @@
                               var ajaxoptions = {
                                   type    : 'POST',
                                   data    : submitdata,
-                                  dataType: 'html',
+                                  dataType: settings.dataType || "html",
                                   url     : settings.target,
                                   success : function(result, status) {
                                       if (ajaxoptions.dataType == 'html') {
                                         $(self).html(result);
+                                      }
+                                      else if (ajaxoptions.dataType == 'json') {
+                                        $(self).html(result[settings.name]);
                                       }
                                       self.editing = false;
                                       callback.apply(self, [result, settings]);

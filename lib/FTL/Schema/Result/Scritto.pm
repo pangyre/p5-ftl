@@ -8,7 +8,7 @@ use overload q{""} => sub {
     $self->scrit || $self->id;
 }, fallback => 1;
 
-__PACKAGE__->load_components("InflateColumn::DateTime",
+__PACKAGE__->load_components( # Not using yet... "InflateColumn::DateTime",
                              "Ordered",
                              "+FTL::Schema::Defaults");
 

@@ -15,6 +15,10 @@
 <script type="text/javascript" src="[% c.uri_for("/3rd/jquery/jquery.expander.js") %]"></script>
 <link href="[% c.uri_for("/3rd/jquery/css/overcast/jquery-ui.css") %]" rel="stylesheet" type="text/css">
 <style type="text/css">
+a[href="#"] {
+white-space:nowrap;
+}
+
 img {
  border:none;
 }
@@ -287,6 +291,31 @@ jQuery(function($){
      return false;
   });
 
+  $("a.undelete").one("click",function(){
+     var $this = $(this);
+     var ident = $this.attr("class").match(/\b(\w+?)\.(\d+)\.id\b/);
+     var path_part = ident[ident.length-2];
+     var id = ident[ident.length-1];
+     var $domTarget = $("."+path_part+"\\."+id+"\\.id");
+     $.ajax({
+        url:"[% c.uri_for("/") %]" + [ path_part, id, "rest" ].join("/")
+        ,type:"POST"
+        ,data:{status:"draft"}
+        ,error:function(xhr){
+           var msg = [ xhr.statusText, xhr.responseText ].join(" · ");
+           $("<div/>").hide().html(msg).addClass("alert")
+                      .css({margin:"1ex"})
+                      .insertAfter($this)
+                      .fadeIn().delay(9000)
+                      .fadeOut("slow",function(){$(this).remove()});
+        }
+        ,success:function(){
+           $domTarget.fadeOut(function(){$(this).remove()})
+        }
+     });
+     return false;
+  });
+
   $("a.newChild").click(function(){
      var $this = $(this);
      var ident = $this.attr("class").match(/\b(\w+?)\.(\d+)\.id\b/);
@@ -358,8 +387,6 @@ $("article.root").sortable({
   ,cursor:"move"
 });
 
-
-
   $(".editable").each(function(){
      var $this = $(this);
      var ident = $this.attr("class").match(/\b(\w+?)\.(\d+)\.id\b/);
@@ -369,9 +396,10 @@ $("article.root").sortable({
      var uri = "[% c.uri_for("/") %]" + [ path_part, id, "rest" ].join("/");
      $(this).editable(uri,{
         indicator  : "<img src='[% c.uri_for("/3rd/img/indicator.gif") %]'>"
+        ,name:"scrit"
         ,type: "POST"
-//        ,dataType: "json"
-//                ,data: {value:value}
+        ,dataType:"json"
+//        ,loadtype:"json"
         ,type      : "autogrow"
         ,submit    : "Update"
         ,cancel    : "Cancel"

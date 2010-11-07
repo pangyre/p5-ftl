@@ -7,6 +7,9 @@
 [% s_link(scritto, "[view]") IF root.id != scritto.id %]
 
   <a href="#" class="delete s.[% scritto.id %].id">delete</a>
+[%-IF scritto.status == "deleted" %]
+  <a href="#" class="undelete s.[% scritto.id %].id">undelete</a>
+[%-END %]
   <a href="#" class="newChild s.[% scritto.id %].id">add child</a>
 
 </aside>

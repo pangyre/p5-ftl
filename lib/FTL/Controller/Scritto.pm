@@ -135,13 +135,16 @@ sub position :Chained("load") Args(0) {
 
 sub ajax_edit :Chained("load") Args(0) {
     my ( $self, $c ) = @_;
-    my $scritto = $c->stash->{scritto} or die "No scritto...";# ||= $c->model("DBIC::Scritto")->new({});
-    # $scritto->$_($c->req->param($_)) for $scritto->columns;
-    $scritto->scrit($c->req->param("value"));
-    $scritto->update();
-    $c->response->content_type("text/html; charset=utf-8");
+    my $scritto = $c->stash->{scritto} or die 404;
+    delete $c->request->params->{id};
+    $scritto->update($c->request->params);
+    $scritto->discard_changes; # Get non-ref dates back out.
+    #$c->response->content_type("text/html; charset=utf-8");
     #$c->response->body(decode_utf8($scritto->scrit));
-    $c->response->body($scritto->scrit);
+    #$c->response->body($scritto->scrit);
+    #use YAML; die YAML::Dump( { $scritto->get_columns } );
+    $c->stash( json => { $scritto->get_columns } );
+    $c->detach($c->view("JSON"));
 }
 
 sub type_edit :Chained("load") Args(0) {
