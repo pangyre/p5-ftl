@@ -1,6 +1,6 @@
 <h1>Deleted scritti</h1>
 
-<p class="alert">Deletes on this page are permanent.</p>
+<p class="alert">Deletes on this page are permanent and cannot be undone.</p>
 
 [% INCLUDE s/index.tt %]
 

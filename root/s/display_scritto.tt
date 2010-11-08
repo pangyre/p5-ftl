@@ -2,7 +2,7 @@
 <article id="s.[% scritto.id %]"
  class="[% "root" IF scritto.is_root %] s.[% scritto.id %].id type[% ( scritto.type || "none" ) | ucfirst %]">
 <aside id="aside.[% scrit.id %]">
-[% scritto.position %]
+[%-# scritto.position %]
 <input type="text" name="scritto.[% scritto.id %].type" placeholder="What is this?" class="type" value="[% scritto.type | html %]" />
 [% s_link(scritto, "[view]") IF root.id != scritto.id %]
 
@@ -10,7 +10,7 @@
 [%-IF scritto.status == "deleted" %]
   <a href="#" class="undelete s.[% scritto.id %].id">undelete</a>
 [%-END %]
-  <a href="#" class="newChild s.[% scritto.id %].id">add child</a>
+  <a href="#" class="newChild s.[% scritto.id %].id">+child</a>
 
 </aside>
 <div class="scrit editable s.[% scritto.id %].id" id="scritto.[% scritto.id %]">[% scritto.scrit %]</div>

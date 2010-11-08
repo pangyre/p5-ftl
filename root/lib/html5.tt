@@ -15,8 +15,23 @@
 <script type="text/javascript" src="[% c.uri_for("/3rd/jquery/jquery.expander.js") %]"></script>
 <link href="[% c.uri_for("/3rd/jquery/css/overcast/jquery-ui.css") %]" rel="stylesheet" type="text/css">
 <style type="text/css">
-a[href="#"] {
-white-space:nowrap;
+aside a[href="#"] {
+ text-decoration:none;
+ font-family:helvetica;
+ font-size:10px;
+ color:black;
+ padding:0 1ex;
+ white-space:nowrap;
+ border:1px solid #99a;
+ border:1px solid #aab;
+ border-radius:100%;
+ box-shadow:1px 1px 1px rgba(0,0,33,0.83);
+ -webkit-box-shadow:1px 1px 1px rgba(0,0,33,0.83);
+ -moz-box-shadow:1px 1px 1px rgba(0,0,33,0.83);
+}
+aside a[href="#"]:hover {
+ color:red;
+ background-color:#ff9;
 }
 
 img {
@@ -115,9 +130,9 @@ width: 100%;
 #content .body {
 clear: left;
 float: left;
-width: 90%;
+width: 95%;
 padding: 1em 0 1.7em 0;
-margin: 0 0 0 5%;
+margin: 0 0 0 3%;
 display: inline;
 
 }
@@ -130,7 +145,7 @@ aside
 {
  clear:right;
  float: right;
- width: 30%;
+ width: 35%;
  padding:  0;
  margin: 0 0 0 0;
  display:block;
@@ -163,11 +178,8 @@ footer {
  box-shadow:2px 3px 3px rgba(0,0,33,0.53);
  -webkit-box-shadow:2px 3px 3px rgba(0,0,33,0.53);
  -moz-box-shadow:2px 3px 3px    rgba(0,0,33,0.53);
-
- box-shadow:1px 1px 1px rgba(0,0,33,0.83);
- -webkit-box-shadow:1px 1px 1px rgba(0,0,33,0.83);
- -moz-box-shadow:1px 1px 1px rgba(0,0,33,0.83);
 }
+
 .alert {
     color:#900;
     font-family:"helvetica neue", helvetica, sans-serif;
@@ -397,9 +409,8 @@ $("article.root").sortable({
      $(this).editable(uri,{
         indicator  : "<img src='[% c.uri_for("/3rd/img/indicator.gif") %]'>"
         ,name:"scrit"
-        ,type: "POST"
+        ,type:"POST"
         ,dataType:"json"
-//        ,loadtype:"json"
         ,type      : "autogrow"
         ,submit    : "Update"
         ,cancel    : "Cancel"

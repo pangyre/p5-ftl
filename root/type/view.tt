@@ -1,0 +1,4 @@
+<p>
+[% type.name %] &middot;
+[% type.description || "<i>no description</i>" %]
+</p>

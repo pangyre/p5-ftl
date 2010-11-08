@@ -129,11 +129,17 @@ __PACKAGE__->has_many(
   { "foreign.parent" => "self.id" },
 );
 
-#__PACKAGE__->has_many(
-#  "scritto_tags",
-#  "FTL::Schema::Result::ScrittoTag",
-#  { "foreign.scritto" => "self.id" },
-#);
+__PACKAGE__->has_many(
+  "scritto_pantags",
+  "FTL::Schema::Result::ScrittoPantag",
+  { "foreign.scritto" => "self.id" },
+);
+
+__PACKAGE__->many_to_many(
+  "pantags",
+  "FTL::Schema::Result::ScrittoTag",
+  { "foreign.scritto" => "self.id" },
+);
 
 #__PACKAGE__->has_many(
 #  "comment_scrittos",
