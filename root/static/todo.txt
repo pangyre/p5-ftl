@@ -1,3 +1,13 @@
+<html><head><title>foo!</title><script
+src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script></head><body> 
+<span style="position:relative"><textarea name="body" rows="4"
+cols="55" maxlength="32768"
+onfocus="$(this).next().hide()"></textarea><span
+style="position:absolute; left: 4px; top: 1px; border: none;
+opacity:.7;" onclick="$(this).hide().prev().focus()">Enter
+Details</span></span> 
+
+
 Tables
 
 (x)author
@@ -21,3 +31,5 @@ Tables
 
 Google config like the yesh3 one for external view to jQuery.
 
+
+</body></html>

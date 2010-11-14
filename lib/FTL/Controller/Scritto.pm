@@ -77,6 +77,14 @@ sub view :PathPart("") Chained("load") Args(0) {
         unless $scritto->parent;
 }
 
+sub raw :Chained("load") Args(0) {
+    my ( $self, $c ) = @_;
+    my $scritto = $c->stash->{scritto};
+    # die 404 unless $scritto->has_column($field);
+    $c->response->content_type( $scritto->content_type || "text/plain" );
+    $c->response->body($scritto->scrit);
+}
+
 sub create :Local { # PUT
     my ( $self, $c, $scrit, $more ) = @_; # No id...?
     die if defined $more;

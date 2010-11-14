@@ -53,7 +53,7 @@ __PACKAGE__->set_primary_key("id");
 
 __PACKAGE__->has_many(
   "scritto_pantags",
-  "FTL::Schema::Result::ScrittoPantags",
+  "FTL::Schema::Result::ScrittoPantag",
   { "foreign.pantag" => "self.id" },
 );
 
@@ -63,9 +63,6 @@ __PACKAGE__->many_to_many(
   { "foreign.scritto" => "self.id" },
 );
 
-
-
 1;
-
 
 __END__

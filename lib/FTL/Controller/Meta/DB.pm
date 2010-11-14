@@ -37,8 +37,8 @@ sub dump_fixtures : Local Args(0) {
 # etc/config/site.json
 
     $fixtures->dump({
-        # all => 1, # just dump everything that's in the schema
-        config => "site.json",
+        all => 1, # just dump everything that's in the schema
+        #config => "site.json",
         schema => $c->model("DBIC")->schema,
         directory => $c->path_to("/etc/fixture"), # output directory
                     });

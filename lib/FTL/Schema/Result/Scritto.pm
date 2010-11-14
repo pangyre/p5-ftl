@@ -110,12 +110,6 @@ __PACKAGE__->belongs_to("user", "FTL::Schema::Result::User", { id => "user" }, {
 
 __PACKAGE__->belongs_to("type", "FTL::Schema::Result::Type");
 
-#__PACKAGE__->might_have("type", "FTL::Schema::Result::Type");
-#__PACKAGE__->belongs_to("type", "FTL::Schema::Result::Type");
-#__PACKAGE__->belongs_to("type", "FTL::Schema::Result::Type");
-#__PACKAGE__->might_have("type", "FTL::Schema::Result::Type", { id => "type" }, {});
-#__PACKAGE__->has_one("type", "FTL::Schema::Result::Type", { id => "type" }, {});
-
 __PACKAGE__->belongs_to(
   "parent",
   "FTL::Schema::Result::Scritto",
@@ -126,7 +120,8 @@ __PACKAGE__->belongs_to(
 __PACKAGE__->has_many(
   "children",
   "FTL::Schema::Result::Scritto",
-  { "foreign.parent" => "self.id" },
+  { "foreign.parent" => "self.id",
+    "foreign.status" => "self.status" },
 );
 
 __PACKAGE__->has_many(
@@ -171,6 +166,30 @@ sub parents {
     $parent->parents(@parents);
 }
 
+# Potentially expensive.
+sub tree {
+    my $self = shift;
+    if ( my $root = $self->root )
+    {
+        return $root, $root->descendants;
+    }
+    else
+    {
+        return $self, $self->descendants;
+    }
+}
+
+sub descendants {
+    my ( $self, @descendants ) = @_;
+    return @descendants unless my @kids = $self->children;
+    for my $kid ( @kids )
+    {
+        push @descendants, $kid->descendants;
+    }
+    push @descendants, @kids;
+    @descendants;
+}
+
 sub depth {
     my $self = shift;
     scalar $self->parents;
@@ -186,6 +205,12 @@ sub is_root {
     my $self = shift;
     ! $self->parent and $self->children_rs->count;
 }
+
+# If a pantag... have to update ->tree
+#sub update {
+#    my ( $self, @args ) = @_;
+#    $self->next::method(@args);
+#}
 
 1;
 

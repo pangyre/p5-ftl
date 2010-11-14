@@ -279,7 +279,7 @@ the <a itemprop="license"
    which will be used to find corresponding id = TABLE.# in the page.
 */
 jQuery(function($){
-  $("a.delete").one("click",function(){
+  $("a.delete").click(function(){
      var $this = $(this);
      var ident = $this.attr("class").match(/\b(\w+?)\.(\d+)\.id\b/);
      var path_part = ident[ident.length-2];
@@ -303,7 +303,7 @@ jQuery(function($){
      return false;
   });
 
-  $("a.undelete").one("click",function(){
+  $("a.undelete").click(function(){
      var $this = $(this);
      var ident = $this.attr("class").match(/\b(\w+?)\.(\d+)\.id\b/);
      var path_part = ident[ident.length-2];
@@ -408,6 +408,7 @@ $("article.root").sortable({
      var uri = "[% c.uri_for("/") %]" + [ path_part, id, "rest" ].join("/");
      $(this).editable(uri,{
         indicator  : "<img src='[% c.uri_for("/3rd/img/indicator.gif") %]'>"
+        ,loadurl   : "[% c.uri_for("/s") %]/" + id + "/raw"
         ,name:"scrit"
         ,type:"POST"
         ,dataType:"json"
