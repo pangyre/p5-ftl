@@ -1,9 +1,11 @@
-Tables
+Round-trip:
 
-(x)author
-(x)scrit 
-(x)type
-(x)tag
+  sqlite3 dummy.sqlt .dump > save.sql
+  rm -f dummy.sqlt
+  curl -I http://localhost:5001/s
+  sqlite3 dummy.sqlt < save.sql
+
+Tables
  * style
      What about the meta/mime stuff?
  * timeline
