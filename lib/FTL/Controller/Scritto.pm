@@ -10,7 +10,14 @@ __PACKAGE__->config(namespace => "s");
 
 has "rows" =>
     is => "ro",
+    isa => "Int",
     default => 50,
+    ;
+
+has "placeholder" =>
+    is => "rw",
+    isa => "Str",
+    default => "[\x{2026}]", # ellipsis.
     ;
 
 sub index :Path Args(0) {
@@ -57,7 +64,9 @@ sub delete :Private {
         $c->detach;
     }
     
-    if ( $scritto->status eq "deleted" ) # It's "deleted" already. Make it real.
+    if ( $scritto->status eq "deleted" # It's "deleted" already. Make it real.
+         or
+         $scritto->scrit eq $self->placeholder ) # It's a "dummy."
     {
             $scritto->delete;
     }
@@ -79,10 +88,18 @@ sub view :PathPart("") Chained("load") Args(0) {
 
 sub raw :Chained("load") Args(0) {
     my ( $self, $c ) = @_;
-    my $scritto = $c->stash->{scritto};
+    my $scritto = $c->stash->{scritto} or die 404;
     # die 404 unless $scritto->has_column($field);
     $c->response->content_type( $scritto->content_type || "text/plain" );
     $c->response->body($scritto->scrit);
+}
+
+sub rendered :Chained("load") Args(0) {
+    my ( $self, $c ) = @_;
+    my $scritto = $c->stash->{scritto};
+    $c->res->status(503);
+    $c->response->content_type("text/plain");
+    $c->response->body("NOT IMPLEMENTED\n");
 }
 
 sub create :Local { # PUT
@@ -93,7 +110,7 @@ sub create :Local { # PUT
     {
         my $params = $c->req->body_params;
         delete $params->{x};
-        $params->{scrit} ||= $self->{placeholder};
+        $params->{scrit} ||= $self->placeholder;
         my $scritto = $c->model("DBIC::Scritto")->find_or_create($params);
         $scritto->user(1);
         $scritto->insert_or_update;

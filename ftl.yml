@@ -6,9 +6,11 @@ use_google_js: 1
 
 # CONTROLLERS -----------------------------------------------
 
-Controller::Scritto:
-  placeholder: "[…]"
+# Controller::Scritto:
 
+Controller::HTML::FormFu:
+  model_stash:
+    schema: DBIC
 
 # MODELS ----------------------------------------------------
 
