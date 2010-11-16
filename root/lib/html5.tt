@@ -279,7 +279,7 @@ the <a itemprop="license"
    which will be used to find corresponding id = TABLE.# in the page.
 */
 jQuery(function($){
-  $("a.delete").click(function(){
+  $("a.delete").dblclick(function(){
      var $this = $(this);
      var ident = $this.attr("class").match(/\b(\w+?)\.(\d+)\.id\b/);
      var path_part = ident[ident.length-2];
