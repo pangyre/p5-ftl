@@ -221,7 +221,7 @@
                        url  : settings.loadurl,
                        data : loaddata,
                        async : false,
-                       success: function(result) {
+                       success: settings.success || function(result) {
                           window.clearTimeout(t);
                           input_content = result;
                           input.disabled = false;

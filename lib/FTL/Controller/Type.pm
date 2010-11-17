@@ -55,8 +55,9 @@ sub create :Private { # PUT
 sub edit :Private { # POST
     my ( $self, $c ) = @_;
     my $type = $c->stash->{type} ||= $c->model("DBIC::Type")->new({});
+    $type->insert unless $type->in_storage;
     delete $c->request->body_params->{id}; # wtf?
-    $type->insert_or_update($c->request->body_params);
+    $type->update($c->request->body_params);
     $c->response->status(204);
 }
 
