@@ -2,3 +2,6 @@
 [% type.name %] &middot;
 [% type.description || "<i>no description</i>" %]
 </p>
+<p>
+[% type.style || "/* no style defined */" %]
+</p>

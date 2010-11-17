@@ -1,7 +1,7 @@
 <ol>
 [% FOR type IN types.all %]
   <li id="type.[% type.id %]">
-  [% type %]
+  <a href="[% c.uri_for_action("/type/rest", [type.id])%]">[% type | html %]</a>
 <a href="#" class="edit">edit</a>
 <a href="#" class="delete">delete</a>
   </li>

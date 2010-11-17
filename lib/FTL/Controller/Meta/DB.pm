@@ -77,10 +77,12 @@ sub schema : Local Args(0) {
                                           ) or die SQL::Translator->error;
 
     $c->res->content_type($choice->{mime});
-
     my $body = $translator->translate;
     $body =~ s{\A.+?<body[^>]*>|</body>.+}{}sg;
-    $c->stash( content => $body );
+    $choice->{mime} eq "text/html" ?
+        $c->stash( content => $body )
+        :
+        $c->response->body( $body );
 }
 
 __PACKAGE__->meta->make_immutable;

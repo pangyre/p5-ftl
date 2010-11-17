@@ -48,7 +48,7 @@ sub create :Private { # PUT
     my $type = $c->stash->{type};
     my $params = $c->req->body_params;
     $type = $c->model("DBIC::Type")->new($params);
-    $type->insert_or_update;
+    $type->insert;
     $c->response->redirect( $c->uri_for_action("/type/view",[$type->id]) );
 }
 

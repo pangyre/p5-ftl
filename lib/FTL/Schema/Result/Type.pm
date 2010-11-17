@@ -36,6 +36,13 @@ __PACKAGE__->add_columns(
     is_nullable => 1,
     size => 65535,
   },
+  "style",
+  {
+    data_type => "TEXT",
+    default_value => "",
+    is_nullable => 1,
+    size => 16215,
+  },
   "created",
   {
     data_type => "DATETIME",
@@ -63,4 +70,16 @@ __PACKAGE__->has_many(
 1;
 
 __END__
+
+sub style_placeholder {
+    my $self = shift;
+    return join(" ",
+                "/*",
+                __PACKAGE__,
+                "id",
+                $self->id,
+                "belonging to",
+                $self->type,
+                "*/");
+}
 
