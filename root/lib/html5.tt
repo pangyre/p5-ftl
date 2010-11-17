@@ -83,7 +83,9 @@ nav ul
 margin: 0;
 padding: 0;
 }
-
+.preWrap {
+ white-space:pre-wrap;
+}
 nav ul li form,
 nav ul li
 {

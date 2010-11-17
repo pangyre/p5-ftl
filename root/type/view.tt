@@ -2,7 +2,7 @@
 [% type.name %] &middot;
 [% type.description || "<i>no description</i>" %]
 </p>
-<p class="generEdit [% type.result_source.name %].[% type.id %].style">
+<p class="preWrap generEdit [% type.result_source.name %].[% type.id %].style">
 [%-type.style || "/* no style defined */"-%]
 </p>
 
@@ -10,6 +10,25 @@
 /*
  Spec: Has a class matching: TABLE.ID.FIELD
 */
+
+var editPOST = function(val,args){
+   var returnValue = val;
+   var data = {};
+   data[args.name] = val;
+   $.ajax({
+           url:args.uri
+           ,type : "POST"
+           ,data : data
+           //,url  : args.loadurl
+           ,async : false
+           ,success: function(result) {
+               if ( result ) returnValue = result; // We take a 204, no post processing.
+           }
+          });
+   return returnValue;
+};
+
+
 jQuery(function($) {
   $(".generEdit").each(function(){
      var $this = $(this);
@@ -19,9 +38,10 @@ jQuery(function($) {
      var id = ident[ident.length-2];
      var field = ident[ident.length-1];
      var uri = "[% c.uri_for("/") %]" + [ table, id, "rest" ].join("/");
-     $(this).editable(uri,{
+     $(this).editable(editPOST,{
         indicator  : "<img src='[% c.uri_for("/3rd/img/indicator.gif") %]'>"
-//        ,loadurl   : "[% c.uri_for("/s") %]/" + id + "/raw"
+        ,uri:uri
+//        ,loadurl   : "[% c.uri_for("/") %]" + [ table, id, "rest/raw", field ].join("/")
         ,name:field
         ,type:"POST"
         ,dataType:"json"
