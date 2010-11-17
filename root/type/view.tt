@@ -2,6 +2,41 @@
 [% type.name %] &middot;
 [% type.description || "<i>no description</i>" %]
 </p>
-<p>
-[% type.style || "/* no style defined */" %]
+<p class="generEdit [% type.result_source.name %].[% type.id %].style">
+[%-type.style || "/* no style defined */"-%]
 </p>
+
+<script type="text/javascript">//<![CDATA[
+/*
+ Spec: Has a class matching: TABLE.ID.FIELD
+*/
+jQuery(function($) {
+  $(".generEdit").each(function(){
+     var $this = $(this);
+     var ident = $this.attr("class").match(/\b([^\W\d]+)\.(\d+)\.([^\W\d]+)\b/);
+     if ( ! ident ) return;
+     var table = ident[ident.length-3];
+     var id = ident[ident.length-2];
+     var field = ident[ident.length-1];
+     var uri = "[% c.uri_for("/") %]" + [ table, id, "rest" ].join("/");
+     $(this).editable(uri,{
+        indicator  : "<img src='[% c.uri_for("/3rd/img/indicator.gif") %]'>"
+//        ,loadurl   : "[% c.uri_for("/s") %]/" + id + "/raw"
+        ,name:field
+        ,type:"POST"
+        ,dataType:"json"
+        ,type      : "autogrow"
+        ,submit    : "Update"
+        ,cancel    : "Cancel"
+        ,tooltip   : "Click to edit"
+        ,onblur    : "ignore"
+        ,event     : "dblclick"
+        ,autogrow  : {
+           lineHeight : 16,
+           minHeight  : 32
+        }
+     });
+  });
+
+});
+//]]> </script>
