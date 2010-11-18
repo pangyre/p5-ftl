@@ -2,9 +2,9 @@
 [% type.name %] &middot;
 [% type.description || "<i>no description</i>" %]
 </p>
-<p class="preWrap generEdit [% type.result_source.name %].[% type.id %].style">
-[%-type.style || "/* no style defined */"-%]
-</p>
+<pre class="preWrap generEdit [% type.result_source.name %].[% type.id %].style">.type[% type.name | ucfirst %] {
+[% FILTER indent("  ") %][% type.style || "/* no style defined */" %][% END %]
+}</pre>
 
 <script type="text/javascript">//<![CDATA[
 /*
