@@ -2,7 +2,7 @@
 <article id="s.[% scritto.id %]"
  class="[% "root" IF scritto.is_root %] s.[% scritto.id %].id type[% ( scritto.type || "none" ) | ucfirst %]">
 <aside id="aside.[% scrit.id %]">
-[%-# scritto.position %]
+<sub>[%- scritto.position %]</sub>
 <input type="text" name="scritto.[% scritto.id %].type" placeholder="What is this?" class="type" value="[% scritto.type | html %]" />
 [% s_link(scritto, "[view]") IF root.id != scritto.id %]
 

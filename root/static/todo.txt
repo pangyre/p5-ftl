@@ -1,3 +1,22 @@
+Adding a style column to type:
+
+BEGIN TRANSACTION;
+CREATE TEMPORARY TABLE type_bak(id,name,description,created,updated);
+INSERT INTO type_bak SELECT id,name,description,created,updated FROM type;
+DROP TABLE type;
+CREATE TABLE type (
+  id INTEGER PRIMARY KEY NOT NULL,
+  name VARCHAR(40) NOT NULL,
+  description TEXT,
+  style TEXT DEFAULT '',
+  created DATETIME(19) NOT NULL,
+  updated TIMESTAMP(14)
+);
+INSERT INTO type SELECT id,name,description,"",created,updated FROM type_bak;
+DROP TABLE type_bak;
+COMMIT;
+
+
 Round-trip:
 
   sqlite3 dummy.sqlt .dump > save.sql

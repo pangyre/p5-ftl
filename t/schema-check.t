@@ -35,6 +35,7 @@ Scritto:
     user: 1
   - scrit: "…"
     user: 1
+
 Type:
   - name: "book"
   - name: "section"

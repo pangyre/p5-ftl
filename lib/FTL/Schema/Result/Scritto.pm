@@ -122,6 +122,7 @@ __PACKAGE__->has_many(
   "FTL::Schema::Result::Scritto",
   { "foreign.parent" => "self.id",
     "foreign.status" => "self.status" },
+    { order_by => "position" }
 );
 
 __PACKAGE__->has_many(
