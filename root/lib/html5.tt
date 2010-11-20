@@ -4,7 +4,7 @@
   <title>[% title || c.name %]</title>
   <link rel="stylesheet" type="text/css" href="[% c.uri_for("/css/universal.css") %]" />
 [%-# feed, prev, next, opensearch, etc %]
-  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="shortcut icon" href="[% c.uri_for("/", c.logo) %]" />
 [%-IF c.config.use_google_js %]
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 [%-#<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9/jquery-ui.min.js"></script>%]
@@ -60,6 +60,16 @@ h1,h2,h3,h4,h5,h6,header {
  font-weight:normal;
  font-style:ultralight;
 }
+
+body > header img {
+ float: left;
+ max-height:55px;
+ margin-right: 1em;
+}
+
+body > header > h1 {
+}
+
 table * {
 
 }
@@ -192,6 +202,7 @@ footer {
     color:#900;
     font-family:"helvetica neue", helvetica, sans-serif;
 }
+
 textarea {
  width:100%;
 }
@@ -210,10 +221,6 @@ textarea {
 .typeStanza > div {
  white-space:pre-wrap;
  line-height:125%;
-}
-.typeProse > div {
- line-height:125%;
- white-space:pre-wrap;
 }
 .highlight {
  background-color:#ffa;
@@ -243,8 +250,8 @@ jQuery(function($) {
 <body>
 
  <header>
-  <a href="[% c.uri_for("/") %]">[% c.config.name %]</a>
-  <h1>[% title || "Untitled page: " _ c.config.name %]</h1>
+  <a href="[% c.uri_for("/") %]"><img src="[% c.uri_for("/", c.logo) %]" alt="[% c.name | html %]" /></a>
+  <h1>[% title || "Untitled page: " _ c.name %]</h1>
  </header>
  <nav>
 <ul>

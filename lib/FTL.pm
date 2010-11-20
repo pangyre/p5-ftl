@@ -35,10 +35,11 @@ has "repository" =>
     lazy => 1,
     default => sub { URI->new("http://github.com/pangyre/p5-ftl") };
 
-sub name {
-    my $c = shift;
-    $c->{name} ||= $c->config->{name};
-}
+has [qw( name logo )] =>
+    is => "ro",
+    isa => "Str",
+    required => 1,
+    ;
 
 sub version { $VERSION }
 

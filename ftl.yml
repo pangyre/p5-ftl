@@ -1,5 +1,6 @@
 ---
 name: "FTL"
+logo: "img/logo/ftl.png"
 default_view: "TT"
 default_model: "DBIC"
 use_google_js: 1
