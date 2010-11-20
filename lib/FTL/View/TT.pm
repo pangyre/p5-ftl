@@ -1,4 +1,4 @@
-xpackage FTL::View::TT;
+package FTL::View::TT;
 use strict;
 use warnings;
 use parent "Catalyst::View::TT";
