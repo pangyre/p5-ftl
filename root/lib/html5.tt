@@ -65,6 +65,7 @@ body > header img {
  float: left;
  max-height:56px;
  margin-right: 1em;
+ opacity:0.9;
 }
 
 body > header > h1 {
@@ -85,6 +86,20 @@ nav {
  background: #334;
  font-family:"gill sans",sans-serif;
  font-weight:normal;
+background: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0, rgb(138,133,137)),
+    color-stop(0.56, rgb(15,15,15))
+);
+background:-moz-linear-gradient(
+    center bottom,
+    rgb(138,133,137) 0%,
+    rgb(15,15,15) 56%
+);
+text-shadow: 2px 2px 1px rgba(24,21,22,0.3);
+
 }
 
 nav ul
