@@ -1,13 +1,14 @@
 [% IF scritto.parent %]
-<div style="border-bottom:1px dotted gray;margin-bottom:1em;">
+<div class="hang" style="margin-bottom:1ex;">
 [% FOR s IN scritto.parents %]
-[% s_link(s,"parent") %]
+[% short_name = s.scrit | truncate(21) %]
+[% s_link(s,short_name) %]
   [% "»" UNLESS loop.last %]
 [% END %]
 </div>
 [% END %]
 
-[% PROCESS s/display_scritto.tt %]
+[%-PROCESS s/display_scritto.tt-%]
 
 <script type="text/javascript">//<![CDATA[
 jQuery(function($){

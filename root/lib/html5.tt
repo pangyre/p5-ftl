@@ -18,6 +18,13 @@
 <script src="[% c.uri_for("/3rd/jquery/jquery.jeditable.autogrow.js") %]" type="text/javascript"></script>
 <script src="[% c.uri_for("/3rd/jquery/jquery.autogrow.js") %]" type="text/javascript"></script>
 <style type="text/css">
+* { border-collapse: collapse; }
+
+.hang {
+ text-indent:-1.2em;
+ margin-left:1.2em;
+}
+
 .ui-tooltip {
  font-size: .775em;
 }
@@ -73,6 +80,7 @@ body > header > h1 {
  line-height:40px;
  padding:8px 0 4px 0;
  margin:0;
+ color:#000;
 }
 
 table * {
@@ -102,7 +110,9 @@ background:-moz-linear-gradient(
     rgb(138,133,137) 0%,
     rgb(15,15,15) 56%
 );
- text-shadow: 2px 2px 1px rgba(24,21,22,0.3);
+
+/* text-shadow: 2px 2px 3px rgba(24,21,22,0.4); */
+
 }
 
 nav ul

@@ -4,7 +4,7 @@
 
 [% MACRO s_link(s,text) BLOCK~%]
   [%~DEFAULT text = s.scrit~%]
-  <a href="[% s_uri(s) %]" title="[% s.scrit | html %]">[% text | html %]</a>
+  <a href="[% s_uri(s) %]" title="[% s.scrit | truncate(100,"…") | html %]">[% text | html %]</a>
 [%~END %]
 
 [%~MACRO s_edit_uri(s) BLOCK~%]

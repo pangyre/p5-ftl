@@ -82,8 +82,7 @@ sub view :PathPart("") Chained("load") Args(0) {
     my ( $self, $c ) = @_;
     my $scritto = $c->stash->{scritto};
     $c->go("default") unless $scritto->in_storage;
-    $c->stash( title => $scritto->scrit )
-        unless $scritto->parent;
+    $c->stash( title => $scritto->root->scrit );
 }
 
 sub raw :Chained("load") Args(0) {

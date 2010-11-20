@@ -198,8 +198,7 @@ sub depth {
 
 sub root {
     my $self = shift;
-    my @parents = $self->parents;
-    return $parents[0];
+    [ $self->parents ]->[0] || $self;
 }
 
 sub is_root {
