@@ -1,5 +1,6 @@
-HOME, top 10 most active,
-top 10 newest,
+Need history and revision tracking of some kind.
+
+Also multi-edit blocking and session tokens.
 
 Adding a style column to type:
 
