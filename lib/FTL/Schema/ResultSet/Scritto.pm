@@ -34,7 +34,7 @@ sub newest {
 }
 
 sub newest_rs {
-    scalar +shift->search({},{order_by => "created DESC"});
+    scalar +shift->newest;
 }
 
 1;
