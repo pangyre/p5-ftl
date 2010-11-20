@@ -69,6 +69,10 @@ body > header img {
 }
 
 body > header > h1 {
+ font-size:30px;
+ line-height:40px;
+ padding:8px 0 4px 0;
+ margin:0;
 }
 
 table * {
@@ -200,8 +204,7 @@ footer {
 /*
   background:#fff url([% c.uri_for("/img/layout/ftl-footer-fade.jpg") %]) repeat-x scroll left top;
 */
- min-height:151px;
- }
+}
 .border {
  border:1px solid #99a;
  border:1px solid #aab;

@@ -2,8 +2,18 @@
 [% content %]
 
 <h2>
- O HAI, [% c.config.name %]!
+ Newest roots
 </h2>
+
+[% new_rs = c.model("DBIC::Scritto").root_rs.newest_rs.search_rs(undef,{rows=>10}) %]
+[%-PROCESS lib/scritti_list.tt scritti = new_rs %]
+
+<h2>
+ Newest non-roots
+</h2>
+
+[% new_rs2 = c.model("DBIC::Scritto").non_root_rs.newest_rs.search_rs(undef,{rows=>10}) %]
+[%-PROCESS lib/scritti_list.tt scritti = new_rs2 %]
 
 [% FILTER html_para %]
 EVERYTHING is discreet writing. Even a title is just a scrit that
@@ -22,6 +32,11 @@ easily graphed.
 
 Plot points
 [% END %]
+
+<h2>To do</h2>
+<div class="typeProse"><div>
+[% INSERT static/todo.txt %]
+</div></div>
 
 [% RETURN %]
 

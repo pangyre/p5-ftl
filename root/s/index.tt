@@ -1,11 +1,1 @@
-<ol>
-[% FOR scrit IN scritti.all %]
-  <li id="scritto.[% scrit.id %]" class="s.[% scrit.id %].id">
-   [% s_link(scrit) %] [% s_edit_link(scrit,"edit") %]
-<a href="#" class="delete s.[% scrit.id %].id">delete</a>
-[%-IF scrit.status == "deleted" %]
-  <a href="#" class="undelete s.[% scrit.id %].id">undelete</a>
-[%-END %]
-  </li>
-[% END %]
-</ol>
+[% PROCESS lib/scritti_list.tt %]

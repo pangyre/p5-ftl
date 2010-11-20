@@ -76,7 +76,7 @@ __PACKAGE__->add_columns(
     data_type => "ENUM",
     default_value => "draft",
     extra => { list => ["draft", "publish", "deleted"] },
-    is_nullable => 1,
+    is_nullable => 0,
     size => 8,
   },
   "type",

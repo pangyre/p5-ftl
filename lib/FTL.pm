@@ -1,9 +1,9 @@
 package FTL;
 use Moose;
+use common::sense; # Test flight. Modern::Perl's mro fucks with Moose/Cat.
 use namespace::autoclean;
 use Catalyst::Runtime 5.80;
 use URI;
-use feature ":5.10";
 
 use Catalyst qw/
                 Unicode::Encoding

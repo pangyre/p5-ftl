@@ -12,12 +12,29 @@ sub root_rs {
     scalar +shift->root;
 }
 
+sub non_root {
+    my $self = shift;
+    $self->search({parent => { "!=" => [ "", undef ] } });
+}
+
+sub non_root_rs {
+    scalar +shift->non_root;
+}
+
 sub deleted {
     +shift->search({status => "deleted"},{where => undef});
 }
 
 sub deleted_rs {
     scalar +shift->deleted;
+}
+
+sub newest {
+    +shift->search({},{order_by => "created DESC"});
+}
+
+sub newest_rs {
+    scalar +shift->search({},{order_by => "created DESC"});
 }
 
 1;
