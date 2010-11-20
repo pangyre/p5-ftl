@@ -5,9 +5,7 @@ use parent "Catalyst::Component"; # The View pieces aren't used.
 
 sub process {
     my ( $self, $c ) = @_;
-    $c->response->body("");
-    $c->response->content_length(0);
-    $c->response->status(204);
+    $c->response->status(204) unless $c->response->body;
 }
 
 1;

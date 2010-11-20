@@ -4,7 +4,7 @@
 </p>
 <pre class="preWrap">.type[% type.name | ucfirst %] {
 <div style="margin-left:3ex" class="generEdit [% type.result_source.name %].[% type.id %].style">
-[%- type.style || "/* no style defined */" -%]
+[%~ type.style || "/* no style defined */" ~%]
 </div>}</pre>
 
 <script type="text/javascript">//<![CDATA[
