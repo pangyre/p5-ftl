@@ -63,7 +63,7 @@ h1,h2,h3,h4,h5,h6,header {
 
 body > header img {
  float: left;
- max-height:55px;
+ max-height:56px;
  margin-right: 1em;
 }
 
