@@ -15,9 +15,9 @@
 [% new_rs2 = c.model("DBIC::Scritto").non_root_rs.newest_rs.search_rs({},{rows=>10}) %]
 [%-PROCESS lib/scritti_list.tt scritti = new_rs2 %]
 
+<h1>Notes / design philosophy</h1>
 [% FILTER html_para %]
-EVERYTHING is discreet writing. Even a title is just a scrit that
-owns things...?
+EVERYTHING is discreet writing. Even a title is just a scrit that owns things.
 
 Legal page alla http://diveintohtml5.org/legal.html ... should be able
 to discover plugins etc.
@@ -416,4 +416,3 @@ vis.render();
 [% FOR s IN c.model("DBIC::Scritto").non_root_rs.all %]
 [% s.id %]->[% s.parent.id || "*" %]<br />
 [% END %]
-
