@@ -6,16 +6,14 @@
 </h2>
 
 [% new_rs = c.model("DBIC::Scritto").root_rs.newest_rs.search_rs({},{rows=>10}) %]
-[%-PROCESS lib/scritti_list.tt 
-   scritti = new_rs %]
+[%-PROCESS lib/scritti_list.tt scritti = new_rs %]
 
 <h2>
  Newest non-roots
 </h2>
 
-[% new_rs2 = c.model("DBIC::Scritto").non_root_rs.search_rs({},{rows=>10}) %]
-[% new_rs2.first.id %]
-[%-INCLUDE lib/scritti_list.tt scritti = new_rs2 %]
+[% new_rs2 = c.model("DBIC::Scritto").non_root_rs.newest_rs.search_rs({},{rows=>10}) %]
+[%-PROCESS lib/scritti_list.tt scritti = new_rs2 %]
 
 [% FILTER html_para %]
 EVERYTHING is discreet writing. Even a title is just a scrit that
@@ -414,3 +412,8 @@ force.node.add(pv.Dot)
 vis.render();
 
     </script>
+
+[% FOR s IN c.model("DBIC::Scritto").non_root_rs.all %]
+[% s.id %]->[% s.parent.id || "*" %]<br />
+[% END %]
+

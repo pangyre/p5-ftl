@@ -14,7 +14,7 @@ sub root_rs {
 
 sub non_root {
     my $self = shift;
-    $self->search({parent => { "!=" => [ "", undef ] } });
+    $self->search({parent => { "!=" => "" } });
 }
 
 sub non_root_rs {
