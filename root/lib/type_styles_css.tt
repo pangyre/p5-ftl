@@ -1,0 +1,5 @@
+[% FOR type IN c.model("DBIC::Type").search({style => { "!=" => undef }}) %]
+.type[% type.name | ucfirst %] > div {
+[% type.style | indent("  ") %]
+}
+[% END %]

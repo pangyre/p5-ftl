@@ -2,9 +2,10 @@
 [% type.name %] &middot;
 [% type.description || "<i>no description</i>" %]
 </p>
-<pre class="preWrap generEdit [% type.result_source.name %].[% type.id %].style">.type[% type.name | ucfirst %] {
-[% FILTER indent("  ") %][% type.style || "/* no style defined */" %][% END %]
-}</pre>
+<pre class="preWrap">.type[% type.name | ucfirst %] {
+<div style="margin-left:3ex" class="generEdit [% type.result_source.name %].[% type.id %].style">
+[%- type.style || "/* no style defined */" -%]
+</div>}</pre>
 
 <script type="text/javascript">//<![CDATA[
 /*
@@ -41,7 +42,7 @@ jQuery(function($) {
      $(this).editable(editPOST,{
         indicator  : "<img src='[% c.uri_for("/3rd/img/indicator.gif") %]'>"
         ,uri:uri
-//        ,loadurl   : "[% c.uri_for("/") %]" + [ table, id, "rest/raw", field ].join("/")
+        ,loadurl   : "[% c.uri_for("/") %]" + [ table, id, "raw", field ].join("/")
         ,name:field
         ,type:"POST"
         ,dataType:"json"

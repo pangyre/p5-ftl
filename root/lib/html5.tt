@@ -40,7 +40,6 @@ aside a[href="#"]:hover {
  color:red;
  background-color:#ff9;
 }
-
 img {
  border:none;
 }
@@ -234,6 +233,7 @@ td,th {
  padding:0 3px;
  margin:2px;
 }
+[% PROCESS lib/type_styles_css.tt %]
 </style>
 <script type="text/javascript">//<![CDATA[
 jQuery(function($) {

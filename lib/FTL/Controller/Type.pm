@@ -30,6 +30,15 @@ sub view :Private {
     my ( $self, $c ) = @_;
 }
 
+sub raw :Chained("load") Args(1) {
+    my ( $self, $c, $field ) = @_;
+    my $type = $c->stash->{type} or die 404;
+    die 404 unless $type->has_column($field);
+    $c->response->content_type("text/plain");
+    $c->response->body($type->$field);
+    $c->detach($c->view("NoOp"));
+}
+
 sub delete :Private {
     my ( $self, $c ) = @_;
     my $type = $c->stash->{type};
