@@ -5,7 +5,7 @@
  Newest roots
 </h2>
 
-[% new_rs = c.model("DBIC::Scritto").root_rs.newest_rs.search_rs({},{rows=>10}) %]
+[% new_rs = c.model("DBIC::Scritto").search_rs({},{page=>1}).root_rs.newest_rs %]
 [%-PROCESS lib/scritti_list.tt scritti = new_rs %]
 
 <h2>
@@ -34,7 +34,7 @@ Plot points
 [% END %]
 
 <h2>To do</h2>
-<div class="typeProse"><div>
+<div class="preWrap"><div>
 [% INSERT static/todo.txt %]
 </div></div>
 

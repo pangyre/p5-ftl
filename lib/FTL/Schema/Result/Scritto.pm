@@ -10,7 +10,9 @@ use overload q{""} => sub {
 
 __PACKAGE__->load_components( # Not using yet... "InflateColumn::DateTime",
                              "Ordered",
-                             "+FTL::Schema::Defaults");
+                             "+FTL::Schema::Defaults",
+                             "+FTL::Schema::ToJson",
+                            );
 
 __PACKAGE__->table("scritto");
 __PACKAGE__->position_column("position");
@@ -217,3 +219,8 @@ sub is_root {
 __END__
 
     alter table scritto add column position INT;
+
+    my $self = shift;
+        map { $_ => $self->$_ }
+        $self->result_source->->columns
+    };

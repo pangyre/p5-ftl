@@ -53,8 +53,9 @@ img {
 html,body {
  margin: 0 auto;
  width: 100%;
- background-color:white;
  background-color:#d3d4d9;
+ background:-webkit-gradient(radial, 765 18, 1000, 806 150, 21,
+ from(#d3d4d9), to(#3D3D3D), color-stop(.6,#C4C4C4));
  color:#001;
  font-family:"helvetica neue", helvetica, sans-serif;
  font-family:"chaparral pro","droid serif",serif;
@@ -88,7 +89,6 @@ table * {
 }
 
 header {
- background: #ccc;
  padding: 1ex;
 }
 
@@ -110,9 +110,7 @@ background:-moz-linear-gradient(
     rgb(138,133,137) 0%,
     rgb(15,15,15) 56%
 );
-
-/* text-shadow: 2px 2px 3px rgba(24,21,22,0.4); */
-
+  /* text-shadow: 2px 2px 3px rgba(24,21,22,0.4); */
 }
 
 nav ul

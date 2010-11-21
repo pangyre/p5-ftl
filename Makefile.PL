@@ -14,10 +14,18 @@ requires "Catalyst::Plugin::ConfigLoader";
 requires "Catalyst::Plugin::Static::Simple";
 requires "Catalyst::Plugin::Unicode::Encoding";
 requires "Catalyst::Action::RenderView";
-requires "Moose";
+requires "Catalyst::View::JSON";
+
 requires "namespace::autoclean";
 requires "YAML";
 requires "JSON::XS";
+
+requires "DBI";
+requires "DBD::SQLite";
+requires "DBIx::Class";
+requires "DBIx::Class::ResultSet::HashRef";
+requries "Catatlyst::Engine::PSGI";
+requires "DBIx::Class::Tree::Mobius"; # Experimental support.
 
 test_requires "Test::More" => "0.88";
 

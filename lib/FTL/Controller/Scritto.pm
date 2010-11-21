@@ -81,7 +81,7 @@ sub delete :Private {
 sub view :PathPart("") Chained("load") Args(0) {
     my ( $self, $c ) = @_;
     my $scritto = $c->stash->{scritto};
-    $c->go("default") unless $scritto->in_storage;
+    $c->go("default") unless $scritto and $scritto->in_storage;
     $c->stash( title => $scritto->root->scrit );
 }
 
@@ -110,11 +110,10 @@ sub create :Local { # PUT
         my $params = $c->req->body_params;
         delete $params->{x};
         $params->{scrit} ||= $self->placeholder;
-        my $scritto = $c->model("DBIC::Scritto")->find_or_create($params);
+        my $scritto = $c->model("DBIC::Scritto")->create($params);
         $scritto->user(1);
-        $scritto->insert_or_update;
+        $scritto->insert;
         $c->response->redirect( $c->uri_for_action("/s/view",[$scritto->id]) );
-        # $c->go("index"); # 321 redirect I think.
     }
     else
     {
@@ -187,6 +186,13 @@ sub default :Path  {
     my $scrit = $c->request->arguments->[0];
     $c->stash->{scritto} ||=
         $c->model("DBIC::Scritto")->new({ scrit => $scrit });
+}
+
+sub json : Chained("load") Args(0) {
+    my ( $self, $c ) = @_;
+    my $scritto = $c->stash->{scritto};
+    $c->stash( json => $scritto );
+    $c->detach($c->view("JSON"));
 }
 
 __PACKAGE__->meta->make_immutable;

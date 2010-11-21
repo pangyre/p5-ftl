@@ -1,8 +1,9 @@
 package FTL::Controller::Meta::DB;
 use Moose;
+no warnings "uninitialized";
 use namespace::autoclean;
 BEGIN { extends "Catalyst::Controller" }
-
+use Date::Calc qw( Today_and_Now );
 use DBIx::Class::Fixtures;
 use SQL::Translator;
 
@@ -18,7 +19,9 @@ sub populate : Local Args(0) {
 
 sub backup : Local Args(0) {
     my ( $self, $c ) = @_;
-    my $backup = $c->path_to("db.backup.sqlt");
+    # 0..4 is to the hour.
+    my $granularity = join("",map {sprintf"%02d",$_} (Today_and_Now())[0..3]);
+    my $backup = $c->path_to("db.backup.$granularity.sqlt");
     $c->model("DBIC")->storage->dbh->sqlite_backup_to_file($backup);
     $c->stash(content => "OK: " . $backup,
               title => "Database backup created",
