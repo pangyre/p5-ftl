@@ -1,5 +1,9 @@
 Need history and revision tracking of some kind.
 
+Parent auto-complete.
+
+Drag and drop trees (currently only kids).
+
 Also multi-edit blocking and session tokens.
 
 Adding a style column to type:

@@ -85,7 +85,7 @@ sub autocomplete :Local {
                                         rows => 25
                                     },
            );
-           
+
            $c->stash(json => [ $rs->hashref_array ] );
 $c->detach($c->view("JSON"));
 }

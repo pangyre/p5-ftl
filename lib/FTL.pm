@@ -29,7 +29,7 @@ __PACKAGE__->config(
     },
 );
 
-has "repository" => 
+has "repository" =>
     is => "ro",
     isa => "URI",
     lazy => 1,

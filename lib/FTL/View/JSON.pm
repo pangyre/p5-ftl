@@ -7,9 +7,6 @@ __PACKAGE__->config(
     expose_stash => "json",
     );
 
-#    allow_blessed => 1,
-#    covert_blessed => 1,
-
 sub encode_json {
     my ( $self, $c, $data ) = @_;
     state $encoder = JSON::XS->new

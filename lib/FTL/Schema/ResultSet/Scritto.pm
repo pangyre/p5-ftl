@@ -1,6 +1,6 @@
 package FTL::Schema::ResultSet::Scritto;
-use strict;
 use warnings;
+use strict;
 use parent "DBIx::Class::ResultSet::HashRef";
 
 sub root {
@@ -49,15 +49,7 @@ FTL::Schema::ResultSet::Scritto - extensions to using L<FTL::Schema::Result::Res
 
 =over 4
 
-=item live
-
-Searches scrittos which match criteria to be called "live." Namely they have a status of C<publish> and have a C<golive> of now or earlier and a C<takedown> sometime in the future. Orders results by C<golive DESC>.
-
-Accepts serach attributes other than status, takedown, and golive. Accepts any additional attributes including C<order_by> to override the default.
-
-=item live_rs
-
-L</live> guaranteed to return a result set.
+=item 321
 
 =back
 

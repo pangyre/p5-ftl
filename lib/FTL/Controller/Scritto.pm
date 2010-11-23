@@ -63,7 +63,7 @@ sub delete :Private {
         $c->res->body('Scritto id(' . $scritto->id . ') has associated scritti');
         $c->detach;
     }
-    
+
     if ( $scritto->status eq "deleted" # It's "deleted" already. Make it real.
          or
          $scritto->scrit eq $self->placeholder ) # It's a "dummy."
