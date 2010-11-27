@@ -1,1 +1,32 @@
 [% form %]
+
+<script type="text/javascript">//<![CDATA[
+jQuery(function($){
+ var renderItem = function(ul,item) {
+     item.value = item.scrit;
+     return $( "<li></li>" )
+         .data( "item.autocomplete", item )
+         .append( "<a>" + item.id + "</a>" )
+         .appendTo( ul );
+ };
+
+ $("input[name='parent']").autocomplete({
+        source:function(req,res){
+           $.ajax({
+             url:"[% c.uri_for("/s/search") %]"
+             ,traditional:true
+             ,dataType:"json"
+             ,data:{ q:req.term
+                     ,col:["scrit","id"] }
+             ,success:function(json){ res(json) }
+           }
+           );
+        }
+        ,delay:100
+        ,select:function(){ $field.trigger("change"); }
+        ,minLenght:1
+    })
+    .data("autocomplete")._renderItem = renderItem;
+
+});
+//]]> </script>

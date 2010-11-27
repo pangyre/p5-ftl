@@ -85,6 +85,33 @@ sub view :PathPart("") Chained("load") Args(0) {
     $c->stash( title => $scritto->root->scrit );
 }
 
+sub search :Local Args(0) {
+    my ( $self, $c ) = @_;
+    $c->stash( json => [] );
+    $c->detach($c->view("JSON"))
+        unless my $q = $c->request->param("q");
+
+    my @fields = $c->request->param("field");
+    push @fields, "scrit" unless @fields;
+
+    my %fields = map { $_ => { LIKE => '%'.$q.'%' } }
+         @fields;
+
+    my @cols = $c->request->param("col");
+
+    my $rs = $c->model("DBIC::Scritto")
+        ->search(\%fields, { ( columns => \@cols ) x!! @cols })
+        ->hashref_rs;
+
+    $c->stash( json => [ $rs->all ] );
+    $c->detach($c->view("JSON"));
+}
+
+sub search_path :Local Args(1) {
+    my ( $self, $c ) = @_;
+    die 503;
+}
+
 sub raw :Chained("load") Args(0) {
     my ( $self, $c ) = @_;
     my $scritto = $c->stash->{scritto} or die 404;
