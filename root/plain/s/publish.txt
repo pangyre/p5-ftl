@@ -1,1 +1,5 @@
-[% scritto %]
+[%-DEFAULT root = scritto %]
+[%-scritto.scrit %]
+[%-FOR kid IN scritto.children %]
+[% INCLUDE s/publish.txt scritto = kid %]
+[%-END %]

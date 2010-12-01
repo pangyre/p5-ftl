@@ -7,8 +7,15 @@ __PACKAGE__->config(
     ENCODING => "utf8",
     TEMPLATE_EXTENSION => '.txt',
     # PRE_PROCESS => 'lib/macros.tt',
+    RECURSION => 1,
     render_die => 1,
 );
+
+sub process {
+    my ( $self, $c, @args ) = @_;
+    $c->response->content_type("text/plain");
+    $self->SUPER::process($c, @args);
+}
 
 1;
 
