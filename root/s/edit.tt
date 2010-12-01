@@ -3,10 +3,18 @@
 <script type="text/javascript">//<![CDATA[
 jQuery(function($){
  var renderItem = function(ul,item) {
-     item.value = item.scrit;
+     item.value = item.id;
+     item.label = item.id;
+     var display = item.scrit;
+     if ( display.length > 80 )
+     {
+        display = display.substr(0,80);
+        display = display.replace(/\W*$/,"…");
+     }
+     item.display = display;
      return $( "<li></li>" )
          .data( "item.autocomplete", item )
-         .append( "<a>" + item.id + "</a>" )
+         .append( "<a>" + display + "</a>" )
          .appendTo( ul );
  };
 
@@ -23,7 +31,12 @@ jQuery(function($){
            );
         }
         ,delay:100
-        ,select:function(){ $field.trigger("change"); }
+        ,select:function(event,ui){
+           var $snippet = $(".snippet:eq(0)");
+           if ( ! $snippet.size() )
+              $snippet = $("<span class='snippet'/>").insertAfter($(this));
+           $snippet.text(ui.item.display).css({marginLeft:"1ex"});
+        }
         ,minLenght:1
     })
     .data("autocomplete")._renderItem = renderItem;
