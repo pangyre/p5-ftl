@@ -89,6 +89,7 @@ sub publish :Chained("load") Args(0) {
     my ( $self, $c ) = @_;
     my $scritto = $c->stash->{scritto} || die 404;
     my $view = $c->model("Views")->lookup($scritto->content_type);
+    # Probably we should catch it with render here and serve it as file-disposed content, yes?
     $c->forward($c->view($view));
 }
 
