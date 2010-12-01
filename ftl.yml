@@ -3,7 +3,7 @@ name: "FTL"
 logo: "img/logo/ftl.png"
 default_view: "TT"
 default_model: "DBIC"
-use_google_js: 1
+use_google_js: ~
 
 # CONTROLLERS -----------------------------------------------
 
@@ -25,3 +25,9 @@ Model::DBIC:
       ChopBlanks: 1
       ShowErrorStatement: 1
       sqlite_unicode: 1
+
+# VIEWS -----------------------------------------------------
+
+View::Plain:
+  INCLUDE_PATH:
+    - __path_to(root/plain)__

@@ -85,6 +85,13 @@ sub view :PathPart("") Chained("load") Args(0) {
     $c->stash( title => $scritto->root->scrit );
 }
 
+sub publish :Chained("load") Args(0) {
+    my ( $self, $c ) = @_;
+    my $scritto = $c->stash->{scritto} || die 404;
+    my $view = $c->model("Views")->lookup($scritto->content_type);
+    $c->forward($c->view($view));
+}
+
 sub search :Local Args(0) {
     my ( $self, $c ) = @_;
     $c->stash( json => [] );
