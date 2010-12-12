@@ -1,0 +1,44 @@
+#!/usr/bin/env perl
+use warnings;
+use strict;
+use YAML;
+use WWW::Mechanize;
+use HTTP::Request::Common;
+use Path::Class qw( file );
+
+# Take credentials or look for auth key.
+my $mech = WWW::Mechanize->new;
+
+my @files = map { file($_) } @ARGV;
+
+for my $file (@files)
+{
+    ( my $title = $file->basename ) =~ s/(?<=[a-z])([A-Z])/ $1/g;
+    $mech->request(POST 'http://localhost:5252/s/create',
+                   [ scrit => $title,
+                     content_type => "text/plain",
+                     status => "draft",
+                     # type => "", # unknown from here, chapter/character
+                   ]
+                  );
+    print "$title --> ", $mech->uri, $/;
+    my ( $parent ) = $mech->uri->path =~ m,/s/(\d+),;
+
+    $mech->request(POST 'http://localhost:5252/s/create',
+                   [ scrit => scalar($file->slurp),
+                     content_type => "text/plain",
+                     status => "draft",
+                     parent => $parent,
+                     type => "prose", # unknown from here, prose/note
+                   ]
+                  );
+}
+
+
+exit 0;
+
+#  Subroutines
+#---------------------------------------------------------------------
+
+__DATA__
+
