@@ -18,10 +18,18 @@ for my $file (@files)
                    [ scrit => $title,
                      content_type => "text/plain",
                      status => "draft",
+                     parent => 149,
                      # type => "", # unknown from here, chapter/character
                    ]
                   );
+
     print "$title --> ", $mech->uri, $/;
+
+#    $mech->request(POST $mech->uri,
+#                   [ parent => 149 ]
+#                  );
+#    last;
+
     my ( $parent ) = $mech->uri->path =~ m,/s/(\d+),;
 
     $mech->request(POST 'http://localhost:5252/s/create',

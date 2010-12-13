@@ -319,6 +319,24 @@ the <a itemprop="license"
 /* Rule: a.delete with a class containing "TABLE.#.ID"...
    which will be used to find corresponding id = TABLE.# in the page.
 */
+
+/* Nodes are identified by: path_part.id.field */
+
+function identNode(el){
+/* Spec:
+     Return data if it exists already?
+     Do ajax get to update data to known state?
+     Parse node and stash the data.
+
+     var ident = $this.attr("class").match(/\b(\w+?)\.(\d+)\.(\w+)\b/);
+     var path_part = ident[ident.length-3]; // Not table, e.g., s-->scritto.
+     var id = ident[ident.length-2];
+     var field = ident[ident.length-1];
+
+*/
+
+}
+
 jQuery(function($){
   $("a.delete").dblclick(function(){
      var $this = $(this);

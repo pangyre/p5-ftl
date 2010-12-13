@@ -145,7 +145,12 @@ sub create :Local { # PUT
         my $params = $c->req->body_params;
         delete $params->{x};
         $params->{scrit} ||= $self->placeholder;
-        my $scritto = $c->model("DBIC::Scritto")->create($params);
+        # Pass 'duplicate' to allow such.
+        my $scritto = delete $params->{duplicate} ?
+            $c->model("DBIC::Scritto")->create($params)
+            :
+            $c->model("DBIC::Scritto")->find_or_create($params);
+
         $scritto->user(1);
         $scritto->insert;
         $c->response->redirect( $c->uri_for_action("/s/view",[$scritto->id]) );
@@ -197,9 +202,6 @@ sub ajax_edit :Chained("load") Args(0) {
     delete $c->request->params->{id};
     $scritto->update($c->request->params);
     $scritto->discard_changes; # Get non-ref dates back out.
-    #$c->response->content_type("text/html; charset=utf-8");
-    #$c->response->body(decode_utf8($scritto->scrit));
-    #$c->response->body($scritto->scrit);
     #use YAML; die YAML::Dump( { $scritto->get_columns } );
     $c->stash( json => { $scritto->get_columns } );
     $c->detach($c->view("JSON"));

@@ -2,5 +2,10 @@
 
 <p class="alert">Deletes on this page are permanent and cannot be undone.</p>
 
+<p><a class="alert" href="#">Permanently erase all deleted scritti</a>.</p>
+
+  <a href="#" class="undelete s.[% scrit.id %].id">undelete</a>
+
+
 [% INCLUDE s/index.tt %]
 
